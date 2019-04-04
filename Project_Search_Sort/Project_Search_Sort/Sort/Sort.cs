@@ -7,28 +7,34 @@ using System.Threading.Tasks;
 
 namespace AllSort
 {
-
     class Sort
     {
-
         private int size;
         private int[] arr;
 
+        #region Constructor
 
-        // normal contruct 
+        /// <summary>
+        ///  Normal contruct 
+        /// </summary>
         public Sort()
         {
             size = 0;
             arr = new int[1001];
         }
-        // extra contruct
+
+        /// <summary>
+        /// extra contruct
+        /// </summary>
+        /// <param name="m">is size of array</param>
+        /// <param name="b">is array, which sort</param>
         public Sort(int m, int[] b)
         {
             size = m;
             arr = new int[size + 1];
             for (int i = 1; i <= size; i++) arr[i] = b[i];
         }
-
+        #endregion
 
         // Nhap du lieu
         public void Input(int m, int[] b)
@@ -36,7 +42,6 @@ namespace AllSort
             size = m;
             for (int i = 1; i <= size; i++) arr[i] = b[i];
         }
-
 
         // Get
         public int getSize()
@@ -60,8 +65,11 @@ namespace AllSort
 
         // Luu y: khi sort, muon sort tu nho den lon thi nhap k = 1
 
-
-        // Bubble
+        #region Bubble Sort
+        /// <summary>
+        /// Bubble Sort
+        /// </summary>
+        /// <param name="k"></param>
         public void BubbleSort(int k)
         {
             if (k == 1)
@@ -85,9 +93,13 @@ namespace AllSort
                 }
             }
         }
+        #endregion
 
-
-        // Select
+        #region Selection Sort
+        /// <summary>
+        /// Selection Sort
+        /// </summary>
+        /// <param name="k"></param>
         public void SelectionSort(int k)
         {
             int max, min;
@@ -116,9 +128,13 @@ namespace AllSort
                 }
             }
         }
+        #endregion
 
-
-        // Insert
+        #region Insert
+        /// <summary>
+        /// Insert
+        /// </summary>
+        /// <param name="k"></param>
         public void InsertionSort(int k)
         {
             for (int i = 2; i <= size; i++)
@@ -147,9 +163,12 @@ namespace AllSort
                 }
             }
         }
+        #endregion
 
-
-        // Counting
+        #region Counting
+        /// <summary>
+        /// Counting
+        /// </summary>
         public void CountingSort()
         {
             int[] count = new int[1001];
@@ -177,9 +196,12 @@ namespace AllSort
 
             //arr = count;
         }
+        #endregion
 
-
-        // Quick
+        #region Quick Sort
+        /// <summary>
+        /// Quick Sort
+        /// </summary>
         public void QuickSort()
         {
             Queue left = new Queue(), right = new Queue();
@@ -219,9 +241,12 @@ namespace AllSort
                 }
             }
         }
+        #endregion
 
-
-        // Shell
+        #region Shell Sort
+        /// <summary>
+        /// Shell Sort
+        /// </summary>
         public void ShellSort()
         {
             int i, j, inc, temp;
@@ -247,29 +272,12 @@ namespace AllSort
                     inc = 1;
             }
         }
+        #endregion
 
-
-        // Merge
-        public void MergeSort()
-        {
-            MergeSort ms = new MergeSort();
-            ms.Input(arr);
-            ms.MergeSort_Recursive(1, size);
-            arr = ms.Output();
-        }
-
-
-        // Heap
-        public void HeapSort()
-        {
-            HeapSort hs = new HeapSort();
-            hs.Input(arr);
-            hs.PerformHeapSort(size);
-            arr = hs.Output();
-        }
-
-
-        // Radix
+        #region Radix Sort
+        /// <summary>
+        /// Radix
+        /// </summary>
         public void RadixSort()
         {
             int i, j;
@@ -280,19 +288,42 @@ namespace AllSort
                 for (i = 0; i < arr.Length; ++i)
                 {
                     bool move = (arr[i] << shift) >= 0;
-                    if (shift == 0 ? !move : move)   
-                        arr[i-j] = arr[i];
-                    else                             
+                    if (shift == 0 ? !move : move)
+                        arr[i - j] = arr[i];
+                    else
                         tmp[j++] = arr[i];
                 }
-                Array.Copy(tmp, 0, arr, arr.Length-j, j);
+                Array.Copy(tmp, 0, arr, arr.Length - j, j);
             }
+        }
+        #endregion
+
+        #region Merge
+        /// <summary>
+        /// Merge
+        /// </summary>
+        public void MergeSort()
+        {
+            MergeSort ms = new MergeSort();
+            ms.Input(arr);
+            ms.MergeSort_Recursive(1, size);
+            arr = ms.Output();
+        }
+        #endregion
+
+        // Heap
+        public void HeapSort()
+        {
+            HeapSort hs = new HeapSort();
+            hs.Input(arr);
+            hs.PerformHeapSort(size);
+            arr = hs.Output();
         }
     }
 
 
 
-   
+
     class HeapSort
     {
         private int heapSize;

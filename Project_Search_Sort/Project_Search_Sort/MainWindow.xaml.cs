@@ -1,19 +1,11 @@
 ﻿using AllSort;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using System.Collections.Generic;
 
 namespace Project_Search_Sort
 {
@@ -22,9 +14,15 @@ namespace Project_Search_Sort
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        private List<TextBlock> listSort;
+        //private List<TextBlock> listSearch;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            /*
             int[] a = { -1, 10, 64, 7, 52, 32, 18, 2, 48, 1, 99 };
             //int[] a = {-1, 1, 1, 5, 5, 8, 9, 2, 2, 3, 1 };
             Sort s = new Sort(10, a);
@@ -32,9 +30,86 @@ namespace Project_Search_Sort
             a = s.getArray();
             for (int i = 1; i <= 10; i++)
             {
-                sx.Text += a[i];
-                sx.Text += " ";
+                //sx.Text += a[i];
+                //sx.Text += " ";
             }
+            */
         }
+
+        private void goLayout()
+        {
+            DoubleAnimation show = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation hide = new DoubleAnimation(0, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation resize = new DoubleAnimation(30, new Duration(TimeSpan.FromSeconds(0.5)));
+
+            BackIntro.Visibility = Visibility.Visible;
+            BackIntro.Opacity = 0;
+
+            BackIntro.BeginAnimation(OpacityProperty, show);
+            Layout.BeginAnimation(OpacityProperty, show);
+            Intro.BeginAnimation(OpacityProperty, hide);
+            Eagle_Team.BeginAnimation(FontSizeProperty, resize);
+
+            Task.Run(async () => {
+                await Task.Delay(1000);
+                Intro.Visibility = Visibility.Hidden;
+            });
+        }
+
+        private void goIntro()
+        {
+            DoubleAnimation show = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation hide = new DoubleAnimation(0, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation resize = new DoubleAnimation(40, new Duration(TimeSpan.FromSeconds(0.5)));
+
+            Intro.Visibility = Visibility.Visible;
+            Intro.BeginAnimation(OpacityProperty, show);
+            Layout.BeginAnimation(OpacityProperty, hide);
+            BackIntro.BeginAnimation(OpacityProperty, hide);
+            Eagle_Team.BeginAnimation(FontSizeProperty, resize);
+
+            Task.Run(async () => {
+                await Task.Delay(1000);
+                BackIntro.Visibility = Visibility.Hidden;
+            });
+        }
+
+        private void createLayoutSort()
+        {
+            listSort = new List<TextBlock>();
+            
+
+        }
+
+        #region Event Button on Intro
+        private void Button_Sort(object sender, RoutedEventArgs e)
+        {
+            goLayout();
+        }
+
+        private void Button_Search(object sender, RoutedEventArgs e)
+        {
+            goLayout();
+        }
+
+        private void Button_Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
+        #region Event Button on Layout
+        private void Button_BackIntro(object sender, RoutedEventArgs e)
+        {
+            goIntro();
+        }
+
+        private void Button_ChosseAlgorithm(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        #endregion
+
     }
 }
