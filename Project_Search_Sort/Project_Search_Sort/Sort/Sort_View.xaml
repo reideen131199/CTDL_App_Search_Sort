@@ -14,29 +14,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Name="LayoutListAlgorithmSort" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3" >Bubble</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Selection</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Insert</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Counting</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Quick</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Shell</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Radix</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Merge</TextBlock>
-            <TextBlock FontSize="16" TextAlignment="Center" Margin="5 3">Heap</TextBlock>
-        </StackPanel>
-
+        <StackPanel Name="LayoutListAlgorithmSort" Grid.Row="0" Orientation="Horizontal"/>
+        <!-- End List Algorithm Sort -->
+        
         <StackPanel Name="LayoutListControl" Grid.Row="1" Orientation="Horizontal">
-            <Button Margin="2" Padding="5" MouseDown="Button_MouseDown">Random Array</Button>
-            <Button Margin="2" Padding="5">Sorted</Button>
-            <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="350" LostFocus="ViewArray_LostFocus"/>
-            <Button Margin="2" Padding="5">Pause</Button>
-            <Button Margin="2" Padding="5">End</Button>
+            <Button Margin="2" Padding="5" Content="Random Array" Click="Button_RandomArr"/>
+            <Button Margin="2" Padding="5" Content="Sorted"/>
+            <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="400" LostFocus="ViewArray_LostFocus"/>
+            <Button Name="Btn_Pause" Margin="2" Padding="5" Content="Pause" Click="Button_Pause" IsEnabled="False"/>
+            <Button Name="Btn_End" Margin="2" Padding="5" Content="End" Click="Button_End" IsEnabled="False"/>
+            <Button Name="Btn_StartSort" Margin="2" Padding="5" FontSize="16" Content="Start Sort" Click="Button_StartSort"/>
         </StackPanel>
-
+        <!-- End List Control Layout Sort -->
+        
         <Border Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2">
             <Canvas Name="LayoutAnimation"/>
         </Border>
+        <!-- End Layout Animation Algorithm-->
         
     </Grid>
 </UserControl>
