@@ -1,11 +1,9 @@
-﻿using AllSort;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using System.Collections.Generic;
 
 namespace Project_Search_Sort
 {
@@ -14,9 +12,7 @@ namespace Project_Search_Sort
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        private List<TextBlock> listSort;
-        //private List<TextBlock> listSearch;
+        private UserControl Child_Layout;
 
         public MainWindow()
         {
@@ -74,21 +70,19 @@ namespace Project_Search_Sort
             });
         }
 
-        private void createLayoutSort()
-        {
-            listSort = new List<TextBlock>();
-            
-
-        }
-
         #region Event Button on Intro
         private void Button_Sort(object sender, RoutedEventArgs e)
         {
+            Child_Layout = new Sort_View();
+            Layout.Children.Add(Child_Layout);
             goLayout();
+
         }
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
+            //Child_Layout = new Search_View();
+            //Layout.Children.Add(Child_Layout);
             goLayout();
         }
 
@@ -99,14 +93,11 @@ namespace Project_Search_Sort
         #endregion
 
         #region Event Button on Layout
+
         private void Button_BackIntro(object sender, RoutedEventArgs e)
         {
             goIntro();
-        }
-
-        private void Button_ChosseAlgorithm(object sender, RoutedEventArgs e)
-        {
-            
+            Layout.Children.Remove(Child_Layout);
         }
 
         #endregion

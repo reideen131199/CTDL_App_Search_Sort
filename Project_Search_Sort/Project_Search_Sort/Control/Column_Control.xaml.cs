@@ -2,8 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Controls;
 
-
-namespace Project_Search_Sort.Control
+namespace Project_Search_Sort
 {
     /// <summary>
     /// Interaction logic for Column_Control.xaml

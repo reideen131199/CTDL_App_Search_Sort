@@ -60,6 +60,9 @@
     </Compile>
     <Compile Include="Sort\ListSort.cs" />
     <Compile Include="Sort\Sort.cs" />
+    <Compile Include="Sort\Sort_View.xaml.cs">
+      <DependentUpon>Sort_View.xaml</DependentUpon>
+    </Compile>
     <Page Include="Control\Column_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,6 +79,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Sort\Sort_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -33,23 +33,13 @@
             </StackPanel>
         
         </Grid>
-
+        <!-- Top Window -->
+        
         <Grid Name="Wrap" Grid.Row="1">
-            <Grid Name="Layout">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <Canvas Name="ListAlgorithm"/>
-                
-                
-            </Grid>
+            <Grid Name="Layout"/>
             <!-- End Layout -->
-
-            <Grid Name="Intro" Visibility="Visible" Opacity="0">
+            
+            <Grid Name="Intro">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="*"/>
@@ -72,7 +62,9 @@
             </Grid>
             <!-- End Intro -->
         </Grid>
-
+        <!-- Content Window -->
+        
         <TextBlock Grid.Row="2" Name="design" Text="Design by Eagle Team" TextAlignment="Right" FontSize="10" Padding="10 0"/>
+        <!-- Bottom Window -->
     </Grid>
 </Window>

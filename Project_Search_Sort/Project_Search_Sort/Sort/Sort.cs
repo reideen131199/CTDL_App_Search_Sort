@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AllSort
+namespace Project_Search_Sort
 {
     class Sort
     {
@@ -311,7 +307,10 @@ namespace AllSort
         }
         #endregion
 
-        // Heap
+        #region Heap Sort
+        /// <summary>
+        /// Heap
+        /// </summary>
         public void HeapSort()
         {
             HeapSort hs = new HeapSort();
@@ -319,10 +318,8 @@ namespace AllSort
             hs.PerformHeapSort(size);
             arr = hs.Output();
         }
+        #endregion
     }
-
-
-
 
     class HeapSort
     {
@@ -396,10 +393,6 @@ namespace AllSort
             { Console.Write("[{0}]", arr[i]); }
         }
     }
-
-
-
-
 
 
     class MergeSort
@@ -483,7 +476,4 @@ namespace AllSort
 
         }
     }
-
-
-
 }
