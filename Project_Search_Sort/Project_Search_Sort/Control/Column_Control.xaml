@@ -5,19 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project_Search_Sort"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="50" MinHeight="30">
+             d:DesignHeight="300" d:DesignWidth="50" MinWidth="30">
     <Grid>
-        
-        <!--
         <Grid.RowDefinitions>
-            <RowDefinition Height="{Binding H}"/>
+            <RowDefinition Height="{Binding Path=Height, ElementName=BorderCol}"/>
             <RowDefinition Height="{Binding Path=Height, ElementName=TextValue}"/>
         </Grid.RowDefinitions>
 
-        <Border Background="{Binding Bg}"/>
+        <Border Name="BorderCol" Height="{Binding H}" Background="{Binding Bg}" BorderBrush="LightBlue" BorderThickness="3"/>
 
-        <TextBlock Name="Textvalue" Grid.Row="1" Text="{Binding Val}" FontSize="24"/>
-        -->
-        
+        <TextBlock Name="Textvalue" Grid.Row="1" Text="{Binding Val}" TextAlignment="Center" FontSize="24"/>
     </Grid>
 </UserControl>

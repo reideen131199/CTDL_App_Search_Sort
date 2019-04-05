@@ -64,6 +64,8 @@ namespace Project_Search_Sort
             BackIntro.BeginAnimation(OpacityProperty, hide);
             Eagle_Team.BeginAnimation(FontSizeProperty, resize);
 
+            Layout.Children.Remove(Child_Layout);
+
             Task.Run(async () => {
                 await Task.Delay(1000);
                 BackIntro.Visibility = Visibility.Hidden;
