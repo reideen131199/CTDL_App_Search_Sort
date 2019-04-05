@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project_Search_Sort"
              mc:Ignorable="d" 
+             Background="#00a8ff"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,14 +27,14 @@
         </StackPanel>
 
         <StackPanel Name="LayoutListControl" Grid.Row="1" Orientation="Horizontal">
-            <Button Margin="2" Padding="5">Random Array</Button>
+            <Button Margin="2" Padding="5" MouseDown="Button_MouseDown">Random Array</Button>
             <Button Margin="2" Padding="5">Sorted</Button>
-            <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="350"/>
+            <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="350" LostFocus="ViewArray_LostFocus"/>
             <Button Margin="2" Padding="5">Pause</Button>
             <Button Margin="2" Padding="5">End</Button>
         </StackPanel>
 
-        <Border Grid.Row="2" BorderBrush="LightGray" BorderThickness="2">
+        <Border Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2">
             <Canvas Name="LayoutAnimation"/>
         </Border>
         

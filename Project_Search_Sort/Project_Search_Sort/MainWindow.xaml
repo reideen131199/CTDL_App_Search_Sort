@@ -34,11 +34,8 @@
         
         </Grid>
         <!-- Top Window -->
-        
+
         <Grid Name="Wrap" Grid.Row="1">
-            <Grid Name="Layout"/>
-            <!-- End Layout -->
-            
             <Grid Name="Intro">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"/>
@@ -61,10 +58,14 @@
             
             </Grid>
             <!-- End Intro -->
+
+            <Grid Name="Layout" Margin="10"/>
+
+            <!-- End Layout -->
         </Grid>
         <!-- Content Window -->
-        
-        <TextBlock Grid.Row="2" Name="design" Text="Design by Eagle Team" TextAlignment="Right" FontSize="10" Padding="10 0"/>
+
+        <TextBlock Name="design" Grid.Row="2" Text="Design by Eagle Team" TextAlignment="Right" FontSize="10" Padding="10 0"/>
         <!-- Bottom Window -->
     </Grid>
 </Window>
