@@ -55,7 +55,7 @@ namespace Project_Search_Sort
             set
             {
                 this.val = value;
-                this.H = value * 10;
+                this.H = value * 4;
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(Val)));
             }
         }

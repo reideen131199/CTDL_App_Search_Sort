@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Project_Search_Sort"
         mc:Ignorable="d"
         Background="#00a8ff"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" 
+        Height="700" Width="900"
+        MinHeight="700" MinWidth="900"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Name="Body">
         <Grid.RowDefinitions>

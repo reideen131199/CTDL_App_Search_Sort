@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Windows.Media.Animation;
 
 namespace Project_Search_Sort
 {
@@ -16,37 +17,43 @@ namespace Project_Search_Sort
 
         private TextBlock chosseAlgorithm;
         private List<TextBlock> AlgorithmSorts;
-        
+        private Control ViewAnimation;
+
         #endregion
 
         #region Constructor
+
         public Sort_View()
         {
             InitializeComponent();
             CreateLayoutListSort();
-            /*
-            int[] a = { -1, 10, 64, 7, 52, 32, 18, 2, 48, 1, 99 };
-            //int[] a = {-1, 1, 1, 5, 5, 8, 9, 2, 2, 3, 1 };
-            Sort s = new Sort(10, a);
-            s.CountingSort();
-            a = s.getArray();
-            for (int i = 1; i <= 10; i++)
-            {
-                //sx.Text += a[i];
-                //sx.Text += " ";
-            }
-            */
+            chosseAlgorithm = AlgorithmSorts[0];
+            chosseAlgorithm.FontWeight = FontWeights.Bold;
+
+            ViewAnimation = new ViewColumn_Control(new int[0]);
+            LayoutAnimation.Children.Add(ViewAnimation);
         }
+
         #endregion
 
         #region Row List Sort
+
         /// <summary>
         /// Create Layout List Sort
         /// </summary>
         private void CreateLayoutListSort()
         {
-            string[] st = { "Bubble", "Selection", "Insert", "Counting",
-                            "Quick", "Shell", "Radix", "Merge", "Heap" };
+            string[] st = {
+                "Bubble",
+                "Selection",
+                "Insert",
+                "Counting",
+                "Quick",
+                "Shell",
+                "Radix",
+                "Merge",
+                "Heap"
+            };
 
             AlgorithmSorts = new List<TextBlock>();
             foreach (string s in st)
@@ -62,8 +69,6 @@ namespace Project_Search_Sort
                 AlgorithmSorts.Add(textBlock);
                 LayoutListAlgorithmSort.Children.Add(textBlock);
             }
-            chosseAlgorithm = AlgorithmSorts[0];
-            chosseAlgorithm.FontWeight = FontWeights.Bold;
         }
 
         /// <summary>
@@ -77,63 +82,118 @@ namespace Project_Search_Sort
             chosseAlgorithm = (TextBlock)sender;
             chosseAlgorithm.FontWeight = FontWeights.Bold;
         }
+
         #endregion
 
         #region Row Control
+
+        private int[] CreateRandomArr()
+        {
+            Random rand = new Random();
+            int n = rand.Next(18) + 3;
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = rand.Next(50) + 1;
+            }
+            return arr;
+        }
+
+        private void Sorting()
+        {
+            Btn_Pause.IsEnabled = true;
+            Btn_Pause.Content = "Pause";
+            Btn_End.IsEnabled = true;
+            Btn_StartSort.IsEnabled = false;
+        }
+
+        private void NotSorting()
+        {
+            Btn_Pause.Content = "Resume";
+            Btn_End.IsEnabled = false;
+        }
+
+        private void Sorted()
+        {
+            Btn_RandomArr.IsEnabled = true;
+            Btn_Sorted.IsEnabled = true;
+            ViewArray.IsEnabled = true;
+            Btn_StartSort.IsEnabled = true;
+            Btn_Pause.IsEnabled = false;
+            Btn_End.IsEnabled = false;
+        }
+
+        private void Button_RandomArr(object sender, RoutedEventArgs e)
+        {
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            int[] arr = CreateRandomArr();
+            ViewArray.Text = string.Join(", ", arr);
+
+            // Send arr to Layout Animation Algorithm
+            int[] dest = new int[arr.Length + 1];
+            Array.Copy(arr, 0, dest, 1, arr.Length);
+            ViewAnimation = new ViewColumn_Control(dest);
+            LayoutAnimation.Children.Add(ViewAnimation);           
+        }
+
+        private void Button_Sorted(object sender, RoutedEventArgs e)
+        {
+            // If Array do not have then Random
+            // ViewArray.Text;
+
+            // Sort Array
+            
+        }
 
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
         {
             // Send ViewArray.Text to Layout Animation Algorithm
         }
 
-        private void Button_RandomArr(object sender, RoutedEventArgs e)
-        {
-            Random rand = new Random();
-            int n = rand.Next(20) + 1;
-
-            int[] arr = new int[n + 1];
-            for (int i = 1; i <= n; i++)
-            {
-                arr[i] = rand.Next(50) + 1;
-            }
-            arr[0] = n;
-            ViewArray.Text = string.Join(", ", arr);
-            // Send ViewArray.Text to Layout Animation Algorithm
-        }
-
-        private void Button_Pause(object sender, RoutedEventArgs e)
-        {
-            /*
-            if (true)
-            {
-                Btn_Pause.Content = "Resume";
-            }
-            else
-            {
-                Btn_Pause.Content = "Pause";
-            }
-            */
-        }
-
-        private void Button_End(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_StartSort(object sender, RoutedEventArgs e)
         {
+            // Check Arr
+            Btn_RandomArr.IsEnabled = false;
+            Btn_Sorted.IsEnabled = false;
+            ViewArray.IsEnabled = false;
             Sorting();
             // Run Animation Layout Sort
         }
 
-        private void Sorting()
+        private void Button_Pause(object sender, RoutedEventArgs e)
         {
-            Btn_Pause.Content = "Resume";
-            Btn_End.IsEnabled = true;
-            Btn_StartSort.IsEnabled = false;
+            if (Btn_Pause.Content.ToString() == "Pause")
+            {
+                NotSorting();
+            }
+            else
+            {
+                Sorting();
+            }
+        }
+
+        private void Button_End(object sender, RoutedEventArgs e)
+        {
+            Sorted();
         }
 
         #endregion
 
+        #region Row View Animation
+
+
+
+        #endregion
+
+        #region Helper
+
+        private void ReadArr(string st)
+        {
+            
+        }
+
+        #endregion
     }
 }
