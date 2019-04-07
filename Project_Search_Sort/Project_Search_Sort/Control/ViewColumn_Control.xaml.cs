@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Collections;
 
 namespace Project_Search_Sort
 {
@@ -16,6 +17,7 @@ namespace Project_Search_Sort
         private int time = 100;
         private Column_Control[] columns;
 
+        // Get Set
         public int Time { get; set; }
 
         #region Constructor
@@ -55,7 +57,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Call function Sort chossed
         /// </summary>
-        public void run(string st)
+        public bool run(string st)
         {
             switch(st)
             {
@@ -73,6 +75,7 @@ namespace Project_Search_Sort
                 
                 default:  break;
             }
+            return true;
         }
 
         #region Algorithm Sort
@@ -81,68 +84,78 @@ namespace Project_Search_Sort
         /// <summary>
         /// Bubble Sort
         /// </summary>
-        /// <param name="k">If k=1, Increasing. if k=0, Decreasing </param>
+        /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
         public async void BubbleSort(int k)
         {
             for (int i = 1; i < size; i++)
             {
                 for (int j = i + 1; j <= size; j++)
                 {
-                    columns[i].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#ff0000");
-                    columns[j].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#ff0000");
+                    columns[i].col.BgCompare();
+                    columns[j].col.BgCompare();
                     await Task.Delay(time + 100);
 
                     if (CompareValue(columns[i].col.Val, columns[j].col.Val, k)) //Swap(ref arr[i], ref arr[j]);
                     {
+                        // Swap
                         AnimationColumn.ExchangeCol(columns[i], columns[j], time);
                         Column_Control temp = columns[i];
                         columns[i] = columns[j];
                         columns[j] = temp;
+                        await Task.Delay(time + 100);
                     }
 
-                    await Task.Delay(time + 100);
                     columns[j].col.BgDefault();
                     columns[j].col.BgDefault();
                 }
-                columns[i].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#00ff50");
+                columns[i].col.BgLock();
             }
-            columns[size].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#00ff50");
+            columns[size].col.BgLock();
         }
         #endregion
 
         #region Selection
-        
+        /// <summary>
+        /// Selection Sort
+        /// </summary>
+        /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
         public async void SelectionSort(int k)
         {
-            int temp;
+            int ValueTemp;
             for (int i = 1; i < size; i++)
             {
-                temp = i;
-                columns[temp].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#bb0000");
+                ValueTemp = i;
+                columns[ValueTemp].col.BgTemp();
+
                 for (int j = i + 1; j <= size; j++)
                 {
-                    //if (arr[j] < arr[min]) min = j;
-                    columns[j].col.Bg = (Brush)(new BrushConverter()).ConvertFromString("#ff0000");
+                    columns[j].col.BgCompare();
                     await Task.Delay(time + 100);
 
-                    if (!CompareValue(columns[j].col.Val, columns[temp].col.Val, k))
+                    if (!CompareValue(columns[j].col.Val, columns[ValueTemp].col.Val, k))
                     {
-                        temp = j;
-
+                        columns[ValueTemp].col.BgDefault();
+                        ValueTemp = j;
+                        columns[ValueTemp].col.BgTemp();
                     }
-                        
+                    else
+                        columns[j].col.BgDefault();
+                }
 
-                    columns[i].col.BgDefault();
-                    columns[j].col.BgDefault();
+                if (ValueTemp != i)
+                {
+                    // Swap
+                    AnimationColumn.ExchangeCol(columns[i], columns[ValueTemp], time);
+                    Column_Control ControlTemp = columns[i];
+                    columns[i] = columns[ValueTemp];
+                    columns[ValueTemp] = ControlTemp;
                     await Task.Delay(time + 100);
                 }
-                if (temp != i)
-                {
-                    //Swap(ref arr[min], ref arr[i]);
-                }
+                columns[i].col.BgLock();
             }
+            columns[size].col.BgLock();
         }
-        
+
         #endregion
 
         #endregion

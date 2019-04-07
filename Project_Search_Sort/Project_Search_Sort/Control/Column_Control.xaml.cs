@@ -35,6 +35,14 @@ namespace Project_Search_Sort
 
     public class Col : INotifyPropertyChanged
     {
+        // Color
+        private const string ColorDefault = "#ccc";
+        private const string ColorTemp = "#bb0000";
+        private const string ColorLock = "#00ff50";
+        private const string ColorCompare = "#ff0000";
+        private const string ColorKey = "#ff8a27";
+        //private const string  = "";
+
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         private int h;
@@ -87,11 +95,34 @@ namespace Project_Search_Sort
             BgDefault();
         }
 
+        #region Set Background 
+
         public void BgDefault()
         {
-            Bg = (Brush)(new BrushConverter()).ConvertFromString("#ccc");
+            Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorDefault);
         }
 
+        public void BgLock()
+        {
+            Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorLock);
+        }
+
+        public void BgCompare()
+        {
+            Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorCompare);
+        }
+
+        public void BgTemp()
+        {
+            Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorTemp);
+        }
+
+        public void BgKey()
+        {
+            Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorKey);
+        }
+
+        #endregion
     }
 
     #endregion

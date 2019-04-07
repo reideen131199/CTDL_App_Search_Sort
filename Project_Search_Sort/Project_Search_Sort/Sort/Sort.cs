@@ -61,6 +61,7 @@ namespace Project_Search_Sort
 
         // Luu y: khi sort, muon sort tu nho den lon thi nhap k = 1
 
+        //Completed
         #region Bubble Sort
         /// <summary>
         /// Bubble Sort
@@ -91,6 +92,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
+        //Completed
         #region Selection Sort
         /// <summary>
         /// Selection Sort
@@ -194,6 +196,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
+        // 
         #region Quick Sort
         /// <summary>
         /// Quick Sort
