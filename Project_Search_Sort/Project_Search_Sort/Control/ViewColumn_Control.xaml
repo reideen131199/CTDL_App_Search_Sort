@@ -7,14 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Border Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2"  Background="#fff">
-        <Grid Name="gg">
+    <Border Name="tttt" Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2"  Background="#fff">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding Path=Height, ElementName=BlockCompare}"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Canvas Name="LayoutAnimation" Margin="5"/>
-            <TextBlock Grid.Row="1" Margin="10" Width="100" Name="ahihi"></TextBlock>
+            <Canvas Name="LayoutAnimation" Grid.Row="0" Margin="5, 20, 5, 0"/>
+            <TextBlock Name="BlockCompare" Grid.Row="1" FontSize="24" Text="|" TextAlignment="Center"/>
+
         </Grid>
     </Border>
 </UserControl>

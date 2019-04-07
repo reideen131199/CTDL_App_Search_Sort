@@ -35,14 +35,6 @@ namespace Project_Search_Sort
 
     public class Col : INotifyPropertyChanged
     {
-        // Color
-        private const string ColorDefault = "#ccc";
-        private const string ColorTemp = "#bb0000";
-        private const string ColorLock = "#00ff50";
-        private const string ColorCompare = "#ff0000";
-        private const string ColorKey = "#ff8a27";
-        //private const string  = "";
-
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         private int h;
@@ -61,7 +53,6 @@ namespace Project_Search_Sort
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(H)));
             }
         }
-
         public int Val
         {
             get
@@ -75,7 +66,6 @@ namespace Project_Search_Sort
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(Val)));
             }
         }
-
         public Brush Bg
         {
             get
@@ -88,14 +78,26 @@ namespace Project_Search_Sort
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(Bg)));
             }
         }
-
         public Col()
         {
             Val = 0;
             BgDefault();
         }
 
-        #region Set Background 
+        #region Color local
+
+        #region Define string rgb Color
+
+        private const string ColorDefault = "#ccc";
+        private const string ColorTemp = "#bb0000";
+        private const string ColorLock = "#00ff50";
+        private const string ColorCompare = "#ff0000";
+        private const string ColorKey = "#ff8a27";
+        //private const string  = "";
+
+        #endregion
+
+        #region Function set Background from string rgb local
 
         public void BgDefault()
         {
@@ -123,6 +125,8 @@ namespace Project_Search_Sort
         }
 
         #endregion
+
+        #endregion
     }
 
     #endregion
@@ -133,22 +137,19 @@ namespace Project_Search_Sort
     {
         public AnimationColumn() { }
 
+        #region Animation Ox
+        
         /// <summary>
         /// Exchange position 2 column control on time
         /// </summary>
         /// <param name="col1">Column 1</param>
         /// <param name="col2">Column 2</param>
         /// <param name="time">Time Exchange(Miliseconds)</param>
-        public static void ExchangeCol(Column_Control col1, Column_Control col2, double time)
+        public static void ExchangeColX(Column_Control col1, Column_Control col2, double time)
         {
-            /*
-            Column_Control temp = col1;
-            col1 = col2;
-            col2 = temp;
-            */
             double savePositionControl_1 = Canvas.GetLeft(col1);
-            MoveCol(col1, Canvas.GetLeft(col2), time);
-            MoveCol(col2, savePositionControl_1, time);
+            MoveColX(col1, Canvas.GetLeft(col2), time);
+            MoveColX(col2, savePositionControl_1, time);
         }
 
         /// <summary>
@@ -157,11 +158,41 @@ namespace Project_Search_Sort
         /// <param name="control">Column need Move</param>
         /// <param name="pos">Position in comparison width Left panel parent</param>
         /// <param name="time">Time move(Miliseconds)</param>
-        public static void MoveCol(Column_Control control, double pos, double time)
+        public static void MoveColX(Column_Control control, double pos, double time)
         {
             DoubleAnimation doubleAnimation = new DoubleAnimation(pos, new Duration(TimeSpan.FromMilliseconds(time)));
             control.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
         }
+
+        #endregion
+
+        #region Animation Oy
+        /// <summary>
+        /// Exchange position 2 column control on time 
+        /// </summary>
+        /// <param name="col1">Column 1</param>
+        /// <param name="col2">Column 2</param>
+        /// <param name="time">Time Exchange(Miliseconds)</param>
+        public static void ExchangeColY(Column_Control col1, Column_Control col2, double time)
+        {
+            double savePositionControl_1 = Canvas.GetBottom(col1);
+            MoveColY(col1, Canvas.GetBottom(col2), time);
+            MoveColY(col2, savePositionControl_1, time);
+        }
+
+        /// <summary>
+        /// Move control to position pos in comparison with Bottom panel parent on time
+        /// </summary>
+        /// <param name="control">Column need Move</param>
+        /// <param name="pos">Position in comparison width Bottom panel parent</param>
+        /// <param name="time">Time move(Miliseconds)</param>
+        public static void MoveColY(Column_Control control, double pos, double time)
+        {
+            DoubleAnimation doubleAnimation = new DoubleAnimation(pos, new Duration(TimeSpan.FromMilliseconds(time)));
+            control.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
+        }
+
+        #endregion 
     }
 
     #endregion

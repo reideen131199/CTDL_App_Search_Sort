@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Background="#00a8ff"
         Title="MainWindow" 
-        Height="700" Width="900"
-        MinHeight="700" MinWidth="900"
+        Height="745" Width="900"
+        MinHeight="745" MinWidth="900"
         WindowStartupLocation="CenterScreen">
 
     <Grid Name="Body">

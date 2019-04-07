@@ -65,7 +65,7 @@ namespace Project_Search_Sort
 
                 case "Selection": SelectionSort(1); break;
 
-                case "Insert":  break;
+                case "Insert": InsertionSort(1); break;
 
                 case "Counting":  break;
 
@@ -98,7 +98,7 @@ namespace Project_Search_Sort
                     if (CompareValue(columns[i].col.Val, columns[j].col.Val, k)) //Swap(ref arr[i], ref arr[j]);
                     {
                         // Swap
-                        AnimationColumn.ExchangeCol(columns[i], columns[j], time);
+                        AnimationColumn.ExchangeColX(columns[i], columns[j], time);
                         Column_Control temp = columns[i];
                         columns[i] = columns[j];
                         columns[j] = temp;
@@ -145,7 +145,7 @@ namespace Project_Search_Sort
                 if (ValueTemp != i)
                 {
                     // Swap
-                    AnimationColumn.ExchangeCol(columns[i], columns[ValueTemp], time);
+                    AnimationColumn.ExchangeColX(columns[i], columns[ValueTemp], time);
                     Column_Control ControlTemp = columns[i];
                     columns[i] = columns[ValueTemp];
                     columns[ValueTemp] = ControlTemp;
@@ -157,6 +157,40 @@ namespace Project_Search_Sort
         }
 
         #endregion
+
+        #region Insert
+        /// <summary>
+        /// Insert Sort
+        /// </summary>
+        /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
+        public async void InsertionSort(int k)
+        {
+            columns[1].col.BgLock();
+            for (int i = 2; i <= size; i++)
+            {
+                Column_Control key = columns[i];
+                key.col.BgCompare();
+                AnimationColumn.MoveColY(key, -280, time);
+                await Task.Delay(time + 100);
+
+                int count = i;
+                while (count-1 > 0 && key.col.Val < columns[count - 1].col.Val)
+                {
+                    count--;
+                    AnimationColumn.ExchangeColX(key, columns[count], time);
+                    await Task.Delay(time + 100);
+                    columns[count + 1] = columns[count];
+                }
+
+                columns[count] = key;
+                AnimationColumn.MoveColY(key, 0, time);
+                key.col.BgLock();
+                await Task.Delay(time + 100);
+            }
+        }
+        #endregion
+
+
 
         #endregion
 
