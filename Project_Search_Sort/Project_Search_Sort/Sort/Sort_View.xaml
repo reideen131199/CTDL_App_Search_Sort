@@ -16,7 +16,7 @@
 
         <StackPanel Name="LayoutListAlgorithmSort" Grid.Row="0" Orientation="Horizontal"/>
         <!-- End List Algorithm Sort -->
-        
+
         <StackPanel Name="LayoutListControl" Grid.Row="1" Orientation="Horizontal">
             <Button Name="Btn_RandomArr"  Margin="2" Padding="5" Content="Random Array" Click="Button_RandomArr"/>
             <Button Name="Btn_Sorted" Margin="2" Padding="5" Content="Sorted" Click="Button_Sorted"/>
@@ -24,11 +24,13 @@
             <Button Name="Btn_StartSort" Margin="2" Padding="5" FontSize="16" Content="Start Sort" Click="Button_StartSort"/>
             <Button Name="Btn_Pause" Margin="2" Padding="5" Content="Pause" Click="Button_Pause" IsEnabled="False"/>
             <Button Name="Btn_End" Margin="2" Padding="5" FontSize="16" Content="End Sort" Click="Button_End" IsEnabled="False"/>
+            <!--
+            <Slider Minimum="100" Maximum="1000" Width="100"/>
+            -->
         </StackPanel>
         <!-- End List Control Layout Sort -->
 
         <Grid Name="LayoutAnimation" Grid.Row="2"/>
-
         <!-- End Layout Animation Algorithm-->
         
     </Grid>

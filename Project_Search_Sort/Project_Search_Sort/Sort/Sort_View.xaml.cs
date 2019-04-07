@@ -17,7 +17,7 @@ namespace Project_Search_Sort
 
         private TextBlock chosseAlgorithm;
         private List<TextBlock> AlgorithmSorts;
-        private Control ViewAnimation;
+        private ViewColumn_Control ViewAnimation;
 
         #endregion
 
@@ -86,7 +86,10 @@ namespace Project_Search_Sort
         #endregion
 
         #region Row Control
-
+        /// <summary>
+        /// Array begin from 0
+        /// </summary>
+        /// <returns></returns>
         private int[] CreateRandomArr()
         {
             Random rand = new Random();
@@ -132,24 +135,44 @@ namespace Project_Search_Sort
             ViewArray.Text = string.Join(", ", arr);
 
             // Send arr to Layout Animation Algorithm
-            int[] dest = new int[arr.Length + 1];
-            Array.Copy(arr, 0, dest, 1, arr.Length);
-            ViewAnimation = new ViewColumn_Control(dest);
+            ViewAnimation = new ViewColumn_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);           
         }
 
         private void Button_Sorted(object sender, RoutedEventArgs e)
         {
             // If Array do not have then Random
-            // ViewArray.Text;
+            if (ViewArray.Text == "")
+            {
+                ViewArray.Text = string.Join(", ", CreateRandomArr());
+            }
+
+            // Read Array
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+
+            // Check arr
+            if (arr.Length == 0)
+            {
+                ShowError("Mảng không hợp lệ!!");
+                return;
+            }
 
             // Sort Array
-            
+            Array.Sort(arr);
+            ViewArray.Text = string.Join(", ", arr);
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumn_Control(arr);
+            LayoutAnimation.Children.Add(ViewAnimation);
         }
 
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
         {
             // Send ViewArray.Text to Layout Animation Algorithm
+            ConvertStringToArr(ViewArray.Text);
         }
 
         private void Button_StartSort(object sender, RoutedEventArgs e)
@@ -159,7 +182,16 @@ namespace Project_Search_Sort
             Btn_Sorted.IsEnabled = false;
             ViewArray.IsEnabled = false;
             Sorting();
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumn_Control(ConvertStringToArr(ViewArray.Text));
+            LayoutAnimation.Children.Add(ViewAnimation);
+
             // Run Animation Layout Sort
+            ViewAnimation.run(chosseAlgorithm.Text);
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -167,6 +199,7 @@ namespace Project_Search_Sort
             if (Btn_Pause.Content.ToString() == "Pause")
             {
                 NotSorting();
+                // Pause Sort
             }
             else
             {
@@ -176,24 +209,37 @@ namespace Project_Search_Sort
 
         private void Button_End(object sender, RoutedEventArgs e)
         {
+            //End Sort
             Sorted();
         }
 
         #endregion
-
-        #region Row View Animation
-
-
-
-        #endregion
-
+        
         #region Helper
 
-        private void ReadArr(string st)
+        /// <summary>
+        /// Convert String To Arr
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns>Return arr[0] if False</returns>
+        private int[] ConvertStringToArr(string st)
         {
-            
+            string[] Sts = st.Split(',');
+            int[] a = new int[Sts.Length];
+
+            for (int i=0; i<Sts.Length; i++)
+            {
+                if (!Int32.TryParse(Sts[i], out a[i]))
+                    return new int[0];
+            }
+            return a;
         }
 
+        private void ShowError(string err)
+        {
+
+        }
+        
         #endregion
     }
 }

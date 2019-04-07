@@ -65,7 +65,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Bubble Sort
         /// </summary>
-        /// <param name="k"></param>
+        /// <param name="k">If k=1, Increasing. if k=0, Decreasing </param>
         public void BubbleSort(int k)
         {
             if (k == 1)

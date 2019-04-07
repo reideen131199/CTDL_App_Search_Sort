@@ -12,7 +12,7 @@
             <RowDefinition Height="{Binding Path=Height, ElementName=TextValue}"/>
         </Grid.RowDefinitions>
 
-        <Border Name="BorderCol" Height="{Binding H}" Background="{Binding Bg}" BorderBrush="LightBlue" BorderThickness="3"/>
+        <Border Name="BorderCol" Height="{Binding H}" Background="{Binding Bg}" BorderBrush="LightBlue" BorderThickness="1"/>
 
         <TextBlock Name="Textvalue" Grid.Row="1" Text="{Binding Val}" TextAlignment="Center" FontSize="24"/>
     </Grid>
