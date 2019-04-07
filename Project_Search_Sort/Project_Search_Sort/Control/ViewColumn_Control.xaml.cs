@@ -33,25 +33,22 @@ namespace Project_Search_Sort
             int[] dest = new int[a.Length + 1];
             Array.Copy(a, 0, dest, 1, a.Length);
 
-            CreateCol(dest);
-        }
-
-        private void CreateCol(int[] arr)
-        {
-            size = (arr.Length < 1) ? 0 : arr.Length - 1;
+            // CreateCol
+            size = (dest.Length < 1) ? 0 : dest.Length - 1;
             columns = new Column_Control[size + 1];
 
-            LayoutAnimation.Width = size * 40;
-            for (int i=1; i<=size; i++)
+            for (int i = 1; i <= size; i++)
             {
                 columns[i] = new Column_Control();
-                columns[i].col.Val = arr[i];
+                columns[i].col.Val = dest[i];
                 Canvas.SetBottom(columns[i], 0);
-                Canvas.SetLeft(columns[i], (i-1) * 40);
+                Canvas.SetLeft(columns[i], (i - 1) * 40);
                 LayoutAnimation.Children.Add(columns[i]);
             }
-        }
 
+            LayoutAnimation.Width = size * 40;
+        }
+        
         #endregion
 
         /// <summary>
@@ -67,7 +64,7 @@ namespace Project_Search_Sort
 
                 case "Insert": InsertionSort(1); break;
 
-                case "Counting":  break;
+                case "Counting": CountingSort(); break;
 
                 case "Quick":  break;
 
@@ -190,6 +187,56 @@ namespace Project_Search_Sort
         }
         #endregion
 
+        #region Counting
+
+        /// <summary>
+        /// Counting
+        /// </summary>
+        public void CountingSort()
+        {
+            int[] count = new int[11];
+            Column_Control[] copy = columns;
+            int maxx = columns[1].col.Val;
+
+            for (int i = 2; i <= size; i++)
+            {
+                count[columns[i].col.Val]++;
+                if (copy[i].col.Val > maxx) maxx = copy[i].col.Val;
+            }
+
+            for (int i = 1; i <= maxx; i++)
+            {
+                count[i] += count[i - 1];
+            }
+
+            columns = new Column_Control[size + 2];
+
+            for (int i = 1; i <= size; i++)
+            {
+                columns[count[copy[i].col.Val]] = copy[i];
+                count[copy[i].col.Val] -= 1;
+            }
+
+            for (int i = 1; i <= size; i++)
+                BlockCompare.Text += columns[i].col.Val.ToString() + ", ";
+
+            //arr = count;
+        }
+
+        private TextBlock createTextValueCol(string text, double posLeft)
+        {
+            TextBlock t = new TextBlock();
+            t.Text = text;
+            t.FontSize = 24;
+            t.Width = 30;
+            t.TextAlignment = System.Windows.TextAlignment.Center;
+            Canvas.SetBottom(t, 0);
+            Canvas.SetLeft(t, posLeft);
+            LayoutAnimation.Children.Add(t);
+            return t;
+        }
+
+        #endregion
 
 
         #endregion

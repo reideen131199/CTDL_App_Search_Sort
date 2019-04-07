@@ -86,23 +86,8 @@ namespace Project_Search_Sort
         #endregion
 
         #region Row Control
-        /// <summary>
-        /// Array begin from 0
-        /// </summary>
-        /// <returns></returns>
-        private int[] CreateRandomArr()
-        {
-            Random rand = new Random();
-            int n = rand.Next(18) + 3;
 
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++)
-            {
-                arr[i] = rand.Next(50) + 1;
-            }
-            return arr;
-        }
-
+        #region 
         private void Sorting()
         {
             Btn_Pause.IsEnabled = true;
@@ -126,6 +111,10 @@ namespace Project_Search_Sort
             Btn_Pause.IsEnabled = false;
             Btn_End.IsEnabled = false;
         }
+
+        #endregion
+
+        #region Event on Row Control
 
         private void Button_RandomArr(object sender, RoutedEventArgs e)
         {
@@ -204,6 +193,7 @@ namespace Project_Search_Sort
             else
             {
                 Sorting();
+                // Resume
             }
         }
 
@@ -214,8 +204,27 @@ namespace Project_Search_Sort
         }
 
         #endregion
-        
+
+        #endregion
+
         #region Helper
+
+        /// <summary>
+        /// Array begin from 0
+        /// </summary>
+        /// <returns></returns>
+        private int[] CreateRandomArr()
+        {
+            Random rand = new Random();
+            int n = rand.Next(18) + 3;
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = rand.Next(50) + 1;
+            }
+            return arr;
+        }
 
         /// <summary>
         /// Convert String To Arr
@@ -235,6 +244,10 @@ namespace Project_Search_Sort
             return a;
         }
 
+        /// <summary>
+        /// Show Error
+        /// </summary>
+        /// <param name="err">Error</param>
         private void ShowError(string err)
         {
 
