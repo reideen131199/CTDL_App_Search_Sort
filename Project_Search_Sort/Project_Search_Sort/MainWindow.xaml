@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Search_Sort"
         mc:Ignorable="d"
-        Background="#00a8ff"
         Title="MainWindow" 
-        Height="745" Width="900"
-        MinHeight="745" MinWidth="900"
-        WindowStartupLocation="CenterScreen">
+        Height="745" Width="900" MinHeight="745" MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        >
+        <!--
+        WindowStyle="None" AllowsTransparency="False"
+        -->
+        
 
-    <Grid Name="Body">
+    <Grid Name="Body" Background="#00a8ff">
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding Path=Height, ElementName=Eagle_Team}"/>
             <RowDefinition Height="*"/>

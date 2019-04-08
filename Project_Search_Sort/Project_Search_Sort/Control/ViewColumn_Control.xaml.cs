@@ -14,12 +14,12 @@ namespace Project_Search_Sort
     {
         //private int[] arr;
         private int size;
-        private int time = 100;
+        private int time = 750;
         private Column_Control[] columns;
 
         // Get Set
         public int Time { get; set; }
-
+        
         #region Constructor
 
         /// <summary>
@@ -64,9 +64,11 @@ namespace Project_Search_Sort
 
                 case "Insert": InsertionSort(1); break;
 
-                case "Counting": CountingSort(); break;
+                case "Counting": //CountingSort();
+                    break;
 
-                case "Quick":  break;
+                case "Quick": QuickSort();
+                    break;
 
                 case "Shell":  break;  
                 
@@ -75,8 +77,8 @@ namespace Project_Search_Sort
             return true;
         }
 
-        #region Algorithm Sort
-        
+        #region Algorithm Sort      Canvas.Bottom: -280
+
         #region Bubble Sort
         /// <summary>
         /// Bubble Sort
@@ -187,23 +189,122 @@ namespace Project_Search_Sort
         }
         #endregion
 
-        #region Counting
+        #region Quick Sort
+        /// <summary>
+        /// Quick Sort
+        /// </summary>
+        public async void QuickSort()
+        {
+            Queue left = new Queue(), right = new Queue();
+            left.Enqueue(1);
+            right.Enqueue(size);
+            int l, r, i, j;
+            Column_Control m = new Column_Control();
 
+            while (left.Count != 0)
+            {
+                l = (int)left.Dequeue();
+                r = (int)right.Dequeue();
+                m = columns[(l + r) / 2];
+                i = l;
+                j = r;
+
+                //columns[m].col.BgKey();
+                BlockCompare.Text = m.col.Val.ToString();
+                while (i <= j)
+                {
+                    columns[i].col.BgCompare();
+                    
+                    while (columns[i].col.Val < m.col.Val)
+                    {
+                        await Task.Delay(time);
+                        columns[i].col.BgDefault();
+                        i++;
+                        columns[i].col.BgCompare();
+                    }
+                    await Task.Delay(time);
+
+                    columns[j].col.BgCompare();
+                    while (columns[j].col.Val > m.col.Val)
+                    {
+                        await Task.Delay(time);
+                        columns[j].col.BgDefault();
+                        j--;
+                        columns[j].col.BgCompare();
+                    }
+                    await Task.Delay(time);
+
+                    if (i <= j)
+                    {
+                        if (i < j)
+                        {
+                            AnimationColumn.ExchangeColX(columns[i], columns[j], time);
+                            Column_Control ControlTemp = columns[i];
+                            columns[i] = columns[j];
+                            columns[j] = ControlTemp;
+                            await Task.Delay(time + 100);
+                        }
+                        columns[i].col.BgDefault();
+                        columns[j].col.BgDefault();
+                        i++;
+                        j--;
+                    }
+                }
+
+                m.col.BgLock();
+
+                if (l < j)
+                {
+                    left.Enqueue(l);
+                    right.Enqueue(j);
+                }
+                if (i < r)
+                {
+                    left.Enqueue(i);
+                    right.Enqueue(r);
+                }
+            }
+
+
+            columns[0] = new Column_Control();
+            columns[0].col.Val = 2;
+            foreach (var c in columns) BlockCompare.Text += c.col.Val.ToString() + " ";
+
+        }
+        #endregion
+
+        #region Counting
+        /*
         /// <summary>
         /// Counting
         /// </summary>
-        public void CountingSort()
+        public async void CountingSort()
         {
-            int[] count = new int[11];
+            int[] count = new int[10];
             Column_Control[] copy = columns;
             int maxx = columns[1].col.Val;
 
-            for (int i = 2; i <= size; i++)
+            // Create Col Count. 1 to 9
+            Canvas layoutCount = new Canvas();
+            layoutCount.Width = 9 * 40;
+            Grid.SetRow(layoutCount, 2);
+            
+            TextBlock[] textBlock = new TextBlock[10];
+            for (int i = 1; i <= 9; i++)
+            {
+                textBlock[i] = new TextBlock();
+                textBlock[i] = createTextValueCol(i.ToString(), (i - 1) * 40);
+                layoutCount.Children.Add(textBlock[i]);
+            }
+            Wrap.Children.Add(layoutCount);
+            BlockCompare.Text = layoutCount.ActualHeight.ToString();
+
+            for (int i = 1; i <= size; i++)
             {
                 count[columns[i].col.Val]++;
                 if (copy[i].col.Val > maxx) maxx = copy[i].col.Val;
             }
-
+            
             for (int i = 1; i <= maxx; i++)
             {
                 count[i] += count[i - 1];
@@ -211,14 +312,11 @@ namespace Project_Search_Sort
 
             columns = new Column_Control[size + 2];
 
-            for (int i = 1; i <= size; i++)
+            for (int i = 1; i <= size; i++) //8,2,3,2,6
             {
                 columns[count[copy[i].col.Val]] = copy[i];
                 count[copy[i].col.Val] -= 1;
             }
-
-            for (int i = 1; i <= size; i++)
-                BlockCompare.Text += columns[i].col.Val.ToString() + ", ";
 
             //arr = count;
         }
@@ -232,12 +330,10 @@ namespace Project_Search_Sort
             t.TextAlignment = System.Windows.TextAlignment.Center;
             Canvas.SetBottom(t, 0);
             Canvas.SetLeft(t, posLeft);
-            LayoutAnimation.Children.Add(t);
             return t;
         }
-
+        */
         #endregion
-
 
         #endregion
 
