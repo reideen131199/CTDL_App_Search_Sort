@@ -88,11 +88,11 @@ namespace Project_Search_Sort
 
         #region Define string rgb Color
 
-        private const string ColorDefault = "#ccc";
-        private const string ColorTemp = "#bb0000";
-        private const string ColorLock = "#00ff50";
-        private const string ColorCompare = "#ff0000";
-        private const string ColorKey = "#ff8a27";
+        private const string ColorDefault = "#FFCCCCCC";
+        private const string ColorTemp = "#FFBB0000";
+        private const string ColorLock = "#FF00FF50";
+        private const string ColorCompare = "#FFFF0000";
+        private const string ColorKey = "#FFFF8A27";
         //private const string  = "";
 
         #endregion
@@ -108,10 +108,22 @@ namespace Project_Search_Sort
         {
             Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorLock);
         }
+        public bool CheckBgLock()
+        {
+            //if (bg == (Brush)(new BrushConverter()).ConvertFromString(ColorLock)) return true;
+            if (bg.ToString() == "#FF00FF50") return true;
+            return false;
+        }
 
         public void BgCompare()
         {
             Bg = (Brush)(new BrushConverter()).ConvertFromString(ColorCompare);
+        }
+        public bool CheckBgCompare()
+        {
+            //if (bg == (Brush)(new BrushConverter()).ConvertFromString(ColorCompare)) return true;
+            if (bg.ToString() == "#FFFF0000") return true;
+            return false;
         }
 
         public void BgTemp()

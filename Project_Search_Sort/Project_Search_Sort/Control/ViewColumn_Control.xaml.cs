@@ -14,7 +14,7 @@ namespace Project_Search_Sort
     {
         //private int[] arr;
         private int size;
-        private int time = 750;
+        private int time = 250;
         private Column_Control[] columns;
 
         // Get Set
@@ -70,7 +70,7 @@ namespace Project_Search_Sort
                 case "Quick": QuickSort();
                     break;
 
-                case "Shell":  break;  
+                case "Shell": ShellSort(); break;  
                 
                 default:  break;
             }
@@ -189,7 +189,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
-        #region Quick Sort
+        #region Quick Sort          Chua khoa
         /// <summary>
         /// Quick Sort
         /// </summary>
@@ -209,12 +209,13 @@ namespace Project_Search_Sort
                 i = l;
                 j = r;
 
-                //columns[m].col.BgKey();
+                m.col.BgKey();
+
                 BlockCompare.Text = m.col.Val.ToString();
                 while (i <= j)
                 {
                     columns[i].col.BgCompare();
-                    
+
                     while (columns[i].col.Val < m.col.Val)
                     {
                         await Task.Delay(time);
@@ -249,15 +250,40 @@ namespace Project_Search_Sort
                         i++;
                         j--;
                     }
+
+                    for (int z = 1; z <= size; z++)
+                        if (columns[z].col.CheckBgCompare())
+                            columns[z].col.BgDefault();
                 }
 
-                m.col.BgLock();
+                //m.col.BgLock();
+                m.col.BgDefault();
+
+                if (l == j) columns[l].col.BgLock();
+
+                if (l > j)
+                {
+                    columns[l].col.BgLock();
+                    columns[l-1].col.BgLock();
+                    columns[j].col.BgLock();
+                }
 
                 if (l < j)
                 {
                     left.Enqueue(l);
                     right.Enqueue(j);
                 }
+
+
+                if (i == r) columns[i].col.BgLock();
+
+                if (r < i)
+                {
+                    columns[r].col.BgLock();
+                    columns[i-1].col.BgLock();
+                    columns[i].col.BgLock();
+                }
+
                 if (i < r)
                 {
                     left.Enqueue(i);
@@ -274,7 +300,7 @@ namespace Project_Search_Sort
         #endregion
 
         #region Counting
-        /*
+        
         /// <summary>
         /// Counting
         /// </summary>
@@ -332,8 +358,92 @@ namespace Project_Search_Sort
             Canvas.SetLeft(t, posLeft);
             return t;
         }
-        */
+
         #endregion
+
+        #region Shell Sort
+        /// <summary>
+        /// Shell Sort
+        /// </summary>
+        public async void ShellSort()
+        {
+            int inc = 3;
+            while (inc > 0)
+            {
+                for (int i = 1; i <= size; i++)
+                {
+                    Column_Control temp = columns[i];
+                    bool Lock = false;
+                    temp.col.BgCompare();
+
+                    // If code dont run while
+                    if (i - inc > 0 && columns[i - inc].col.Val <= temp.col.Val)
+                    {
+                        if (columns[i - inc].col.CheckBgLock()) Lock = true;
+
+                        columns[i - inc].col.BgCompare();
+                        await Task.Delay(time);
+
+                        if (Lock)
+                            columns[i - inc].col.BgLock();
+                        else
+                            columns[i - inc].col.BgDefault();
+                    }
+
+                    // While for insert temp
+                    int j = i;
+                    while ((j - inc > 0) && (columns[j - inc].col.Val > temp.col.Val))
+                    {
+                        Lock = false;
+                        if (columns[j - inc].col.CheckBgLock()) Lock = true;
+
+                        columns[j - inc].col.BgCompare();
+                        await Task.Delay(time);
+
+                        AnimationColumn.ExchangeColX(columns[j - inc], temp, time);
+                        await Task.Delay(time + 100);
+
+                        columns[j] = columns[j - inc];
+                        if (Lock)
+                            columns[j].col.BgLock();
+                        else
+                            columns[j].col.BgDefault();
+                        j = j - inc;
+                    }
+
+                    // If compare value in While fail
+                    if ((j - inc > 0) && (columns[j - inc].col.Val <= temp.col.Val))
+                    {
+                        Lock = false;
+                        if (columns[j - inc].col.CheckBgLock()) Lock = true;
+
+                        columns[j - inc].col.BgCompare();
+                        await Task.Delay(time);
+
+                        if (Lock)
+                            columns[j - inc].col.BgLock();
+                        else
+                            columns[j - inc].col.BgDefault();
+                    }
+
+
+                    columns[j] = temp;
+                    if (inc == 1)
+                        temp.col.BgLock();
+                    else
+                        temp.col.BgDefault();
+                }
+
+                if (inc / 2 != 0)
+                    inc = inc / 2;
+                else if (inc == 1)
+                    inc = 0;
+                else
+                    inc = 1;
+            }
+        }
+        #endregion
+
 
         #endregion
 

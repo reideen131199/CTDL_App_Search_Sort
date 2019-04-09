@@ -198,7 +198,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
-        // 
+        // ahihi
         #region Quick Sort
         /// <summary>
         /// Quick Sort
@@ -244,7 +244,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
-        // 
+        // Completed
         #region Shell Sort
         /// <summary>
         /// Shell Sort
@@ -266,6 +266,7 @@ namespace Project_Search_Sort
                     }
                     arr[j] = temp;
                 }
+
                 if (inc / 2 != 0)
                     inc = inc / 2;
                 else if (inc == 1)

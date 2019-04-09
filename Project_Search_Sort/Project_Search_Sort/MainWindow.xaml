@@ -8,8 +8,7 @@
         Title="MainWindow" 
         Height="745" Width="900" MinHeight="745" MinWidth="900"
         WindowStartupLocation="CenterScreen"
-        >
-        <!--
+        ><!--
         WindowStyle="None" AllowsTransparency="False"
         -->
         
