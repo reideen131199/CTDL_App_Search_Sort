@@ -70,7 +70,6 @@
     <Compile Include="Sort\ViewColumnSort_Control.xaml.cs">
       <DependentUpon>ViewColumnSort_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\Search.cs" />
     <Compile Include="Search\Search_View.xaml.cs">
       <DependentUpon>Search_View.xaml</DependentUpon>
     </Compile>

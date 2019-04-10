@@ -90,6 +90,7 @@ namespace Project_Search_Sort
                 if (columns[i].col.Val == Value)
                 {
                     AnimationColumn.MoveColY(columns[i], Bot, time);
+                    AnimationColumn.MoveColX(columns[i], (size / 2 - 1) * 40, time);
                     columns[i].col.BgLock();
                     break;
                 }
