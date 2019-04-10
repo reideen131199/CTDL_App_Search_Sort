@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Project_Search_Sort
+namespace Project_Search_Sort.Sort
 {
     class Sort
     {
@@ -301,6 +301,7 @@ namespace Project_Search_Sort
         }
         #endregion
 
+        // Completed
         #region Merge
         /// <summary>
         /// Merge
@@ -401,6 +402,7 @@ namespace Project_Search_Sort
         }
     }
 
+    // Completed
     class MergeSort
     {
         private int[] numbers;

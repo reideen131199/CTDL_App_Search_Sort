@@ -58,8 +58,14 @@
     <Compile Include="Control\Column_Control.xaml.cs">
       <DependentUpon>Column_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ViewColumn_Control.xaml.cs">
-      <DependentUpon>ViewColumn_Control.xaml</DependentUpon>
+    <Compile Include="Search\ViewColumnSearch_Control.xaml.cs">
+      <DependentUpon>ViewColumnSearch_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Search\ViewTreeSearch_Control.xaml.cs">
+      <DependentUpon>ViewTreeSearch_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sort\ViewColumnSort_Control.xaml.cs">
+      <DependentUpon>ViewColumnSort_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search\Search.cs" />
     <Compile Include="Search\Search_View.xaml.cs">
@@ -69,11 +75,25 @@
     <Compile Include="Sort\Sort_View.xaml.cs">
       <DependentUpon>Sort_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sort\ViewRadixSort_Control.xaml.cs">
+      <DependentUpon>ViewRadixSort_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sort\ViewTreeSort_Control.xaml.cs">
+      <DependentUpon>ViewTreeSort_Control.xaml</DependentUpon>
+    </Compile>
     <Page Include="Control\Column_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\ViewColumn_Control.xaml">
+    <Page Include="Search\ViewColumnSearch_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search\ViewTreeSearch_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sort\ViewColumnSort_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,6 +114,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sort\Sort_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sort\ViewRadixSort_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sort\ViewTreeSort_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

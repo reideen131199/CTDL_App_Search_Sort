@@ -10,7 +10,7 @@ namespace Project_Search_Sort
     /// <summary>
     /// Interaction logic for ViewColumn_Control.xaml
     /// </summary>
-    public partial class ViewColumn_Control : UserControl
+    public partial class ViewColumnSort_Control : UserControl
     {
         //private int[] arr;
         protected int size;
@@ -26,7 +26,7 @@ namespace Project_Search_Sort
         /// Create View Column Control
         /// </summary>
         /// <param name="a">Array need show</param>
-        public ViewColumn_Control(int[] a)
+        public ViewColumnSort_Control(int[] a)
         {
             InitializeComponent();
 
@@ -84,7 +84,9 @@ namespace Project_Search_Sort
             }
         }
 
-        #region Algorithm Sort      Canvas.Bottom: -280(Insert Sort)
+        #region Algorithm Sort      Canvas.Bottom: -280(Insert Sort, Merge)
+
+        private double Bot = -280;
 
         #region Bubble Sort
         /// <summary>
@@ -176,7 +178,7 @@ namespace Project_Search_Sort
             {
                 Column_Control key = columns[i];
                 key.col.BgCompare();
-                AnimationColumn.MoveColY(key, -280, time);
+                AnimationColumn.MoveColY(key, Bot, time);
                 await Task.Delay(time + 100);
 
                 int count = i;
@@ -271,7 +273,7 @@ namespace Project_Search_Sort
                 if (l > j)
                 {
                     columns[l].col.BgLock();
-                    columns[l - 1].col.BgLock();
+                    columns[l - 1].col.BgLock();    // Error
                     columns[j].col.BgLock();
                 }
 
@@ -297,12 +299,6 @@ namespace Project_Search_Sort
                     right.Enqueue(r);
                 }
             }
-
-
-            columns[0] = new Column_Control();
-            columns[0].col.Val = 2;
-            foreach (var c in columns) BlockCompare.Text += c.col.Val.ToString() + " ";
-
         }
         #endregion
 
@@ -402,7 +398,7 @@ namespace Project_Search_Sort
             {
                 temp[i] = columns[i];
                 columns[i].col.BgCompare();
-                AnimationColumn.MoveColY(columns[i], -280, time);
+                AnimationColumn.MoveColY(columns[i], Bot, time);
             }
             await Task.Delay(time);
 

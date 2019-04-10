@@ -17,7 +17,7 @@ namespace Project_Search_Sort
 
         private TextBlock chosseAlgorithm;
         private List<TextBlock> AlgorithmSorts;
-        private ViewColumn_Control ViewAnimation;
+        private ViewColumnSort_Control ViewAnimation;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Project_Search_Sort
             chosseAlgorithm = AlgorithmSorts[0];
             chosseAlgorithm.FontWeight = FontWeights.Bold;
 
-            ViewAnimation = new ViewColumn_Control(new int[0]);
+            ViewAnimation = new ViewColumnSort_Control(new int[0]);
             LayoutAnimation.Children.Add(ViewAnimation);
         }
 
@@ -124,7 +124,7 @@ namespace Project_Search_Sort
             ViewArray.Text = string.Join(", ", arr);
 
             // Send arr to Layout Animation Algorithm
-            ViewAnimation = new ViewColumn_Control(arr);
+            ViewAnimation = new ViewColumnSort_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);           
         }
 
@@ -154,7 +154,7 @@ namespace Project_Search_Sort
             LayoutAnimation.Children.Remove(ViewAnimation);
 
             // Send arr and Create ViewAnimation new
-            ViewAnimation = new ViewColumn_Control(arr);
+            ViewAnimation = new ViewColumnSort_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);
         }
 
@@ -176,7 +176,7 @@ namespace Project_Search_Sort
             LayoutAnimation.Children.Remove(ViewAnimation);
 
             // Send arr and Create ViewAnimation new
-            ViewAnimation = new ViewColumn_Control(ConvertStringToArr(ViewArray.Text));
+            ViewAnimation = new ViewColumnSort_Control(ConvertStringToArr(ViewArray.Text));
             LayoutAnimation.Children.Add(ViewAnimation);
 
             // Run Animation Layout Sort
