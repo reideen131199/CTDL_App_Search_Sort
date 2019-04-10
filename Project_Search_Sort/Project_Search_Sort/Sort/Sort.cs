@@ -401,7 +401,6 @@ namespace Project_Search_Sort
         }
     }
 
-
     class MergeSort
     {
         private int[] numbers;

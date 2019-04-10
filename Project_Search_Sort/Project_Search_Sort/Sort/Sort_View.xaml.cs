@@ -47,12 +47,12 @@ namespace Project_Search_Sort
                 "Bubble",
                 "Selection",
                 "Insert",
-                "Counting",
-                "Quick",
                 "Shell",
-                "Radix",
+                "Quick",
                 "Merge",
-                "Heap"
+                "Radix",
+                "Heap",
+                "Counting"
             };
 
             AlgorithmSorts = new List<TextBlock>();
