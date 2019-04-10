@@ -18,26 +18,6 @@ namespace Project_Search_Sort
             InitializeComponent();
         }
 
-        private void goIntro()
-        {
-            DoubleAnimation show = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.75)));
-            DoubleAnimation hide = new DoubleAnimation(0, new Duration(TimeSpan.FromSeconds(0.75)));
-            DoubleAnimation resize = new DoubleAnimation(40, new Duration(TimeSpan.FromSeconds(0.5)));
-            Intro.Visibility = Visibility.Visible;
-
-            Intro.BeginAnimation(OpacityProperty, show);
-            Layout.BeginAnimation(OpacityProperty, hide);
-            BackIntro.BeginAnimation(OpacityProperty, hide);
-            Eagle_Team.BeginAnimation(FontSizeProperty, resize);
-
-            Layout.Children.Remove(Child_Layout);
-
-            Task.Run(async () => {
-                await Task.Delay(1000);
-                BackIntro.Visibility = Visibility.Hidden;
-            });
-        }
-
         #region Event Button on Intro
 
         private void Button_Sort(object sender, RoutedEventArgs e)
@@ -50,8 +30,8 @@ namespace Project_Search_Sort
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
-            //Child_Layout = new Search_View();
-            //Layout.Children.Add(Child_Layout);
+            Child_Layout = new Search_View();
+            Layout.Children.Add(Child_Layout);
             goLayout();
         }
 
@@ -60,6 +40,18 @@ namespace Project_Search_Sort
             this.Close();
         }
         #endregion
+
+        #region Event Button on Layout
+
+        private void Button_BackIntro(object sender, RoutedEventArgs e)
+        {
+            goIntro();
+            Layout.Children.Remove(Child_Layout);
+        }
+
+        #endregion
+
+        #region Helper
 
         private void goLayout()
         {
@@ -81,15 +73,26 @@ namespace Project_Search_Sort
             });
         }
 
-        #region Event Button on Layout
-
-        private void Button_BackIntro(object sender, RoutedEventArgs e)
+        private void goIntro()
         {
-            goIntro();
+            DoubleAnimation show = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation hide = new DoubleAnimation(0, new Duration(TimeSpan.FromSeconds(0.75)));
+            DoubleAnimation resize = new DoubleAnimation(40, new Duration(TimeSpan.FromSeconds(0.5)));
+            Intro.Visibility = Visibility.Visible;
+
+            Intro.BeginAnimation(OpacityProperty, show);
+            Layout.BeginAnimation(OpacityProperty, hide);
+            BackIntro.BeginAnimation(OpacityProperty, hide);
+            Eagle_Team.BeginAnimation(FontSizeProperty, resize);
+
             Layout.Children.Remove(Child_Layout);
+
+            Task.Run(async () => {
+                await Task.Delay(1000);
+                BackIntro.Visibility = Visibility.Hidden;
+            });
         }
 
         #endregion
-
     }
 }

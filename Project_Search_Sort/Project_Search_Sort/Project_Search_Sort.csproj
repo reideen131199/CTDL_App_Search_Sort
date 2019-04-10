@@ -58,6 +58,9 @@
     <Compile Include="Control\Column_Control.xaml.cs">
       <DependentUpon>Column_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Radix_Control.xaml.cs">
+      <DependentUpon>Radix_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Search\ViewColumnSearch_Control.xaml.cs">
       <DependentUpon>ViewColumnSearch_Control.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
       <DependentUpon>ViewTreeSort_Control.xaml</DependentUpon>
     </Compile>
     <Page Include="Control\Column_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Radix_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

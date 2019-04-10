@@ -87,7 +87,8 @@ namespace Project_Search_Sort
 
         #region Row Control
 
-        #region 
+        #region Status
+
         private void Sorting()
         {
             Btn_Pause.IsEnabled = true;

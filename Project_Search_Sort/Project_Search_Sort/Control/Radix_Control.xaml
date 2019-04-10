@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Project_Search_Sort.Control.Radix_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_Search_Sort.Control"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="70">
+    <Grid Height="{Binding Path=Height, ElementName=TextBlock_Value}">
+        <Border BorderBrush="LightBlue" BorderThickness="1">
+            <TextBlock Name="TextBlock_Value" Margin="5" FontSize="24" TextAlignment="Center" Text="{Binding Val}"/>
+        </Border>
+    </Grid>
+</UserControl>

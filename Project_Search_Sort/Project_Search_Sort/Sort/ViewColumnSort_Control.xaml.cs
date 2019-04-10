@@ -13,9 +13,9 @@ namespace Project_Search_Sort
     public partial class ViewColumnSort_Control : UserControl
     {
         //private int[] arr;
-        protected int size;
-        protected int time = 100;
-        protected Column_Control[] columns;
+        private int size;
+        private int time = 100;
+        private Column_Control[] columns;
 
         // Get Set
         public int Time { get; set; }
