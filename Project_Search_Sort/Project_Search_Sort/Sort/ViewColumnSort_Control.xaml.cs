@@ -16,18 +16,19 @@ namespace Project_Search_Sort
         private int size;
         private int time = 100;
         private Column_Control[] columns;
+        private bool pause = false;
 
         // Get Set
         public int Time
         {
-            get
-            {
-                return time;
-            }
-            set
-            {
-                time = value;
-            }
+            get { return time; }
+            set { time = value; }
+        }
+
+        public bool Pause
+        {
+            get { return pause; }
+            set { pause = value; }
         }
 
         #region Constructor
@@ -78,6 +79,10 @@ namespace Project_Search_Sort
                 {
                     columns[i].col.BgCompare();
                     columns[j].col.BgCompare();
+
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     await Task.Delay(time + 100);
 
                     if (CompareValue(columns[i].col.Val, columns[j].col.Val, k)) //Swap(ref arr[i], ref arr[j]);
@@ -117,6 +122,9 @@ namespace Project_Search_Sort
                     columns[j].col.BgCompare();
                     await Task.Delay(time + 100);
 
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     if (CompareValue(columns[ValueTemp].col.Val, columns[j].col.Val, k))
                     {
                         columns[ValueTemp].col.BgDefault();
@@ -155,12 +163,20 @@ namespace Project_Search_Sort
             {
                 Column_Control key = columns[i];
                 key.col.BgCompare();
+
+                // Pause
+                if (pause) await PauseAnimation();
+
                 AnimationColumn.MoveColY(key, Bot, time);
                 await Task.Delay(time + 100);
 
                 int count = i;
                 while (count - 1 > 0 && CompareValue(columns[count - 1].col.Val, key.col.Val, k))
                 {
+
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     count--;
                     AnimationColumn.ExchangeColX(key, columns[count], time);
                     await Task.Delay(time + 100);
@@ -202,12 +218,19 @@ namespace Project_Search_Sort
                 {
                     columns[i].col.BgCompare();
 
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     while (columns[i].col.Val < m.col.Val)
                     {
                         await Task.Delay(time);
                         columns[i].col.BgDefault();
                         i++;
                         columns[i].col.BgCompare();
+
+                        // Pause
+                        if (pause) await PauseAnimation();
+
                     }
                     await Task.Delay(time);
 
@@ -218,6 +241,10 @@ namespace Project_Search_Sort
                         columns[j].col.BgDefault();
                         j--;
                         columns[j].col.BgCompare();
+
+                        // Pause
+                        if (pause) await PauseAnimation();
+
                     }
                     await Task.Delay(time);
 
@@ -225,6 +252,9 @@ namespace Project_Search_Sort
                     {
                         if (i < j)
                         {
+                            // Pause
+                            if (pause) await PauseAnimation();
+
                             AnimationColumn.ExchangeColX(columns[i], columns[j], time);
                             Column_Control ControlTemp = columns[i];
                             columns[i] = columns[j];
@@ -308,6 +338,9 @@ namespace Project_Search_Sort
                             columns[i - inc].col.BgDefault();
                     }
 
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     // While for insert temp
                     int j = i;
                     while ((j - inc > 0) && (columns[j - inc].col.Val > temp.col.Val))
@@ -317,6 +350,9 @@ namespace Project_Search_Sort
 
                         columns[j - inc].col.BgCompare();
                         await Task.Delay(time);
+
+                        // Pause
+                        if (pause) await PauseAnimation();
 
                         AnimationColumn.ExchangeColX(columns[j - inc], temp, time);
                         await Task.Delay(time + 100);
@@ -334,6 +370,9 @@ namespace Project_Search_Sort
                     {
                         Lock = false;
                         if (columns[j - inc].col.CheckBgLock()) Lock = true;
+
+                        // Pause
+                        if (pause) await PauseAnimation();
 
                         columns[j - inc].col.BgCompare();
                         await Task.Delay(time);
@@ -376,11 +415,18 @@ namespace Project_Search_Sort
                 temp[i] = columns[i];
                 columns[i].col.BgCompare();
                 AnimationColumn.MoveColY(columns[i], Bot, time);
+
+                // Pause
+                if (pause) await PauseAnimation();
+
             }
             await Task.Delay(time);
 
             while ((left <= left_end) && (mid <= right))
             {
+                // Pause
+                if (pause) await PauseAnimation();
+
                 if (temp[left].col.Val <= temp[mid].col.Val)
                 {
                     AnimationColumn.MoveColX(temp[left], (tmp_pos-1) * 40, time);
@@ -399,6 +445,9 @@ namespace Project_Search_Sort
 
             while (left <= left_end)
             {
+                // Pause
+                if (pause) await PauseAnimation();
+
                 AnimationColumn.MoveColX(temp[left], (tmp_pos - 1) * 40, time);
                 AnimationColumn.MoveColY(temp[left], 0, time);
                 await Task.Delay(time + 100);
@@ -407,6 +456,9 @@ namespace Project_Search_Sort
             
             while (mid <= right)
             {
+                // Pause
+                if (pause) await PauseAnimation();
+
                 AnimationColumn.MoveColX(temp[mid], (tmp_pos - 1) * 40, time);
                 AnimationColumn.MoveColY(temp[mid], 0, time);
                 await Task.Delay(time + 100);
@@ -526,6 +578,16 @@ namespace Project_Search_Sort
             for (int i = 1; i <= size; i++)
                 columns[i].col.BgLock();
         }
+        
+        /// <summary>
+        /// Function Pause
+        /// </summary>
+        /// <returns></returns>
+        private async Task PauseAnimation()
+        {
+            while (pause) { await Task.Delay(500); }
+        }
+
         #endregion
     }
 }

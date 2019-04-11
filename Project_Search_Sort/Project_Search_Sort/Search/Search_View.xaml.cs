@@ -126,8 +126,6 @@ namespace Project_Search_Sort
             // Send arr to Layout Animation Algorithm
             ViewAnimation = new ViewColumnSearch_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);
-
-            Btn_RandomArr.Content = Slider_Time.Value.ToString();
         }
 
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
@@ -179,12 +177,16 @@ namespace Project_Search_Sort
             if (Btn_Pause.Content.ToString() == "Pause")
             {
                 NotSearching();
+                
                 // Pause Sort
+                ViewAnimation.Pause = true;
             }
             else
             {
                 Searching();
+
                 // Resume
+                ViewAnimation.Pause = false;
             }
         }
 

@@ -178,7 +178,11 @@ namespace Project_Search_Sort
             // Check arr
 
             // Sort Array
-            Array.Reverse(arr);
+            Array.Sort<int>(arr,
+                    new Comparison<int>(
+                            (i1, i2) => i2.CompareTo(i1)
+                    ));
+
             ViewArray.Text = string.Join(", ", arr);
 
             // Remove ViewAnimation old
@@ -226,12 +230,16 @@ namespace Project_Search_Sort
             if (Btn_Pause.Content.ToString() == "Pause")
             {
                 NotSorting();
+
                 // Pause Sort
+                ViewAnimation.Pause = true;
             }
             else
             {
                 Sorting();
-                // Resume
+
+                // Resume Sort
+                ViewAnimation.Pause = false;
             }
         }
 

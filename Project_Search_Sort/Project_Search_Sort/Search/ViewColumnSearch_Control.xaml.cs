@@ -13,24 +13,27 @@ namespace Project_Search_Sort
 
         private int size;
         private int time = 100;
+        private bool pause = false;
         private Column_Control[] columns;
         private double Bot = -280;
 
         private int[] arr;
-        #endregion
+
 
         // Get Set Time
         public int Time
         {
-            get
-            {
-                return time;
-            }
-            set
-            {
-                time = value;
-            }
+            get { return time; }
+            set { time = value; }
         }
+
+        public bool Pause
+        {
+            get { return pause; }
+            set { pause = value; }
+        }
+
+        #endregion
 
         #region Constructor
 
@@ -58,6 +61,7 @@ namespace Project_Search_Sort
         #region Algorithm Search
 
         #region Linear Search
+
         /// <summary>
         /// Algorithm Search Linear
         /// </summary>
@@ -68,6 +72,10 @@ namespace Project_Search_Sort
             for (i=1; i<=size; i++)
             {
                 columns[i].col.BgCompare();
+
+                // Pause
+                await PauseAnimation();
+
                 await Task.Delay(time);
                 if (columns[i].col.Val == Value)
                 {
@@ -92,15 +100,25 @@ namespace Project_Search_Sort
         public async Task Binary(int Value)
         {
             int left = 1, right = size, mid = left;
-            
+
+            time = time + 300;
+
             columns[left].col.BgKey();
             columns[right].col.BgKey();
+
+            // Pause
+            await PauseAnimation();
+
             await Task.Delay(time);
 
-            while (left <= right && mid <= right && mid >= left)
+            while (left <= right && mid <= size && mid >= 1)
             {
                 mid = (left + right) / 2;
                 columns[mid].col.BgCompare();
+
+                // Pause
+                await PauseAnimation();
+
                 await Task.Delay(time);
 
                 if (columns[mid].col.Val == Value)
@@ -119,22 +137,25 @@ namespace Project_Search_Sort
                     columns[right].col.BgDefault();
                     columns[mid].col.BgDefault();
                     right = mid - 1;
-                    columns[right].col.BgKey();
+                    if (right >= 1) columns[right].col.BgKey();
                 }
                 else
                 {
                     columns[left].col.BgDefault();
                     columns[mid].col.BgDefault();
                     left = mid + 1;
-                    columns[left].col.BgKey();
+                    if (left <= size) columns[left].col.BgKey();
                     
                 }
+
+                // Pause
+                await PauseAnimation();
 
                 await Task.Delay(time);
             }
 
-            columns[left].col.BgDefault();
-            columns[right].col.BgDefault();
+            if (left <= size) columns[left].col.BgDefault();
+            if (right >= 1) columns[right].col.BgDefault();
             if (columns[mid].col.Val != Value) BlockCompare.Text = "Not Found!!";
         }
 
@@ -178,6 +199,10 @@ namespace Project_Search_Sort
             if (i > size) BlockCompare.Text = "Not Found!!!";
         }
 
+        /// <summary>
+        /// Create Layout Columns
+        /// </summary>
+        /// <param name="dest">Array Value for Columns</param>
         private void CreateCol(int[] dest)
         {
             for (int i = 1; i <= size; i++)
@@ -191,6 +216,16 @@ namespace Project_Search_Sort
 
             LayoutAnimation.Width = size * 40;
         }
+
+        /// <summary>
+        /// Function Pause
+        /// </summary>
+        /// <returns></returns>
+        private async Task PauseAnimation()
+        {
+            while (pause) { await Task.Delay(500); }
+        }
+
         #endregion
     }
 }
