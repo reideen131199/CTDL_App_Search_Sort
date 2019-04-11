@@ -79,9 +79,6 @@
     <Compile Include="Search\ViewColumnSearch_Control.xaml.cs">
       <DependentUpon>ViewColumnSearch_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\ViewTreeSearch_Control.xaml.cs">
-      <DependentUpon>ViewTreeSearch_Control.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Sort\ViewColumnSort_Control.xaml.cs">
       <DependentUpon>ViewColumnSort_Control.xaml</DependentUpon>
     </Compile>
@@ -115,10 +112,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Search\ViewColumnSearch_Control.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Search\ViewTreeSearch_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
