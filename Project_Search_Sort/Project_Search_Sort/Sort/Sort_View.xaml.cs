@@ -29,6 +29,7 @@ namespace Project_Search_Sort
             CreateLayoutListSort();
             chosseAlgorithm = AlgorithmSorts[0];
             chosseAlgorithm.FontWeight = FontWeights.Bold;
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.AntiqueWhite);
 
             ViewAnimation = new ViewColumnSort_Control(new int[0]);
             LayoutAnimation.Children.Add(ViewAnimation);
@@ -78,9 +79,11 @@ namespace Project_Search_Sort
         /// <param name="e"></param>
         private void TextBlock_SelecAlgSort(object sender, RoutedEventArgs e)
         {
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.Transparent);
             chosseAlgorithm.FontWeight = FontWeights.Normal;
             chosseAlgorithm = (TextBlock)sender;
             chosseAlgorithm.FontWeight = FontWeights.Bold;
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.AntiqueWhite);
         }
 
         #endregion
@@ -131,21 +134,20 @@ namespace Project_Search_Sort
 
         private void Button_Sorted(object sender, RoutedEventArgs e)
         {
+            Btn_Decreasing.Visibility = Visibility.Visible;
+            Btn_Increasing.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Sort_Increasing(object sender, RoutedEventArgs e)
+        {
             // If Array do not have then Random
             if (ViewArray.Text == "")
-            {
                 ViewArray.Text = string.Join(", ", CreateRandomArr());
-            }
 
             // Read Array
             int[] arr = ConvertStringToArr(ViewArray.Text);
 
             // Check arr
-            if (arr.Length == 0)
-            {
-                ShowError("Mảng không hợp lệ!!");
-                return;
-            }
 
             // Sort Array
             Array.Sort(arr);
@@ -157,6 +159,35 @@ namespace Project_Search_Sort
             // Send arr and Create ViewAnimation new
             ViewAnimation = new ViewColumnSort_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);
+
+            Btn_Decreasing.Visibility = Visibility.Collapsed;
+            Btn_Increasing.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Sort_Decreasing(object sender, RoutedEventArgs e)
+        {
+            // If Array do not have then Random
+            if (ViewArray.Text == "")
+                ViewArray.Text = string.Join(", ", CreateRandomArr());
+
+            // Read Array
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+
+            // Check arr
+
+            // Sort Array
+            Array.Reverse(arr);
+            ViewArray.Text = string.Join(", ", arr);
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSort_Control(arr);
+            LayoutAnimation.Children.Add(ViewAnimation);
+
+            Btn_Decreasing.Visibility = Visibility.Collapsed;
+            Btn_Increasing.Visibility = Visibility.Collapsed;
         }
 
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
@@ -176,12 +207,8 @@ namespace Project_Search_Sort
             // Remove ViewAnimation old
             LayoutAnimation.Children.Remove(ViewAnimation);
 
-            // Send arr and Create ViewAnimation new
-            ViewAnimation = new ViewColumnSort_Control(ConvertStringToArr(ViewArray.Text));
-            LayoutAnimation.Children.Add(ViewAnimation);
-
             // Run Animation Layout Sort
-            ViewAnimation.run(chosseAlgorithm.Text);
+            run(chosseAlgorithm.Text);
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -225,6 +252,43 @@ namespace Project_Search_Sort
                 arr[i] = rand.Next(50) + 1;
             }
             return arr;
+        }
+
+        /// <summary>
+        /// Call function Sort chossed
+        /// </summary>
+        public async void run(string st)
+        {
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSort_Control(ConvertStringToArr(ViewArray.Text));
+            LayoutAnimation.Children.Add(ViewAnimation);
+
+            switch (st)
+            {
+                case "Selection":
+                    ViewAnimation.SelectionSort(1);
+                    break;
+
+                case "Insert":
+                    ViewAnimation.InsertionSort(1);
+                    break;
+
+                case "Quick":
+                    ViewAnimation.QuickSort();
+                    break;
+
+                case "Shell":
+                    ViewAnimation.ShellSort();
+                    break;
+
+                case "Merge":
+                    await ViewAnimation.MergeSort_Recursive(1, -1);
+                    break;
+
+                default:
+                    ViewAnimation.BubbleSort(1);
+                    break;
+            }
         }
 
         /// <summary>

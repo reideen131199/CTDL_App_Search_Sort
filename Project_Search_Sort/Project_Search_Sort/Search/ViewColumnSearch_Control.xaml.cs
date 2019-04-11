@@ -52,27 +52,6 @@ namespace Project_Search_Sort
 
         #endregion
 
-        /// <summary>
-        /// Call function Sort chossed
-        /// </summary>
-        public void run(string st, int Value)
-        {
-            switch (st)
-            {
-                case "Binary":
-                    Binary(Value);
-                    break;
-
-                case "Binary_Search_Tree":
-                    BinarySearchTree(Value);
-                    break;
-
-                default:
-                    Linear(Value);
-                    break;
-            }
-        }
-
         #region Algorithm Search
 
         #region Linear Search
@@ -80,7 +59,7 @@ namespace Project_Search_Sort
         /// Algorithm Search Linear
         /// </summary>
         /// <param name="Value">Value need find</param>
-        private async void Linear(int Value)
+        public async void Linear(int Value)
         {
             int i = 1;
             for (i=1; i<=size; i++)
@@ -107,7 +86,7 @@ namespace Project_Search_Sort
         /// Algorithm Binary Search
         /// </summary>
         /// <param name="Value"></param>
-        private async void Binary(int Value)
+        public async void Binary(int Value)
         {
             BlockCompare.Text = "Binary Search";
         }
@@ -120,7 +99,7 @@ namespace Project_Search_Sort
         /// Algorithm Binary Search Tree
         /// </summary>
         /// <param name="Value">Value need find</param>
-        private async void BinarySearchTree(int Value)
+        public async void BinarySearchTree(int Value)
         {
             BlockCompare.Text = "Binary Search Tree";
         }

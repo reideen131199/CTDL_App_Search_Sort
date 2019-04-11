@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:Control="clr-namespace:Project_Search_Sort.Control"  x:Class="Project_Search_Sort.Search_View"
+﻿<UserControl x:Class="Project_Search_Sort.Search_View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

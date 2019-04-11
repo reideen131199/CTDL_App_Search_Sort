@@ -142,7 +142,7 @@ namespace Project_Search_Sort
             LayoutAnimation.Children.Add(ViewAnimation);
 
             // Run Animation Layout Search
-            ViewAnimation.run(chosseAlgorithm.Name, Int16.Parse(ValueSearch.Text));
+            run(chosseAlgorithm.Name, Int16.Parse(ValueSearch.Text));
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -204,6 +204,27 @@ namespace Project_Search_Sort
                     return new int[0];
             }
             return a;
+        }
+
+        /// <summary>
+        /// Call function Sort chossed
+        /// </summary>
+        public void run(string st, int Value)
+        {
+            switch (st)
+            {
+                case "Binary":
+                    ViewAnimation.Binary(Value);
+                    break;
+
+                case "Binary_Search_Tree":
+                    ViewAnimation.BinarySearchTree(Value);
+                    break;
+
+                default:
+                    ViewAnimation.Linear(Value);
+                    break;
+            }
         }
 
         /// <summary>

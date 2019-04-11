@@ -34,6 +34,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -58,8 +67,14 @@
     <Compile Include="Control\Column_Control.xaml.cs">
       <DependentUpon>Column_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Node_Control.xaml.cs">
+      <DependentUpon>Node_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Radix_Control.xaml.cs">
       <DependentUpon>Radix_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Vector_Control.xaml.cs">
+      <DependentUpon>Vector_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search\ViewColumnSearch_Control.xaml.cs">
       <DependentUpon>ViewColumnSearch_Control.xaml</DependentUpon>
@@ -87,7 +102,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\Node_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Radix_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Vector_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +181,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button_Exit.png" />
+    <Resource Include="Images\Button_Search.png" />
+    <Resource Include="Images\Button_Sort.png" />
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

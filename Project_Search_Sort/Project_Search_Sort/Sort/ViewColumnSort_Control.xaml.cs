@@ -51,39 +51,6 @@ namespace Project_Search_Sort
 
         #endregion
 
-        /// <summary>
-        /// Call function Sort chossed
-        /// </summary>
-        public async void run(string st)
-        {
-            switch (st)
-            {
-                case "Selection":
-                    SelectionSort(1);
-                    break;
-
-                case "Insert":
-                    InsertionSort(1);
-                    break;
-
-                case "Quick":
-                    QuickSort();
-                    break;
-
-                case "Shell":
-                    ShellSort();
-                    break;
-                    
-                case "Merge":
-                    await MergeSort_Recursive(1, size);
-                    break;
-
-                default:
-                    BubbleSort(1);
-                    break;
-            }
-        }
-
         #region Algorithm Sort      Canvas.Bottom: -280(Insert Sort, Merge)
 
         private double Bot = -280;
@@ -440,6 +407,7 @@ namespace Project_Search_Sort
 
         public async Task MergeSort_Recursive(int left, int right)
         {
+            if (right == -1) right = size;
             if (right > left)
             {
                 int mid = (right + left) / 2; //Divide step

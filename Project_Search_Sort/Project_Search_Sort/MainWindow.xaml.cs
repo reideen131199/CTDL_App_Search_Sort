@@ -3,6 +3,9 @@ using System.Windows;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System.Windows.Resources;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace Project_Search_Sort
 {
@@ -16,6 +19,21 @@ namespace Project_Search_Sort
         public MainWindow()
         {
             InitializeComponent();
+
+            Uri resourceUri = new Uri("Images/Button_Sort.png", UriKind.Relative);
+            StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+            BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+            Btn_Sort.Background = new ImageBrush(temp);
+
+            resourceUri = new Uri("Images/Button_Search.png", UriKind.Relative);
+            streamInfo = Application.GetResourceStream(resourceUri);
+            temp = BitmapFrame.Create(streamInfo.Stream);
+            Btn_Search.Background = new ImageBrush(temp);
+
+            resourceUri = new Uri("Images/Button_Exit.png", UriKind.Relative);
+            streamInfo = Application.GetResourceStream(resourceUri);
+            temp = BitmapFrame.Create(streamInfo.Stream);
+            Btn_Exit.Background = new ImageBrush(temp);
         }
 
         #region Event Button on Intro

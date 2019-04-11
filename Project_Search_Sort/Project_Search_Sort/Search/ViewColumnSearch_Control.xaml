@@ -16,7 +16,6 @@
             </Grid.RowDefinitions>
             <Canvas Name="LayoutAnimation" Grid.Row="0" Margin="5, 20, 5, 0"/>
             <TextBlock Name="BlockCompare" Grid.Row="1" FontSize="24" TextAlignment="Center"/>
-
         </Grid>
     </Border>
     

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Search_Sort"
         mc:Ignorable="d"
+        Icon="icon.ico"
         Title="MainWindow" 
         Height="745" Width="900" MinHeight="745" MinWidth="900"
         WindowStartupLocation="CenterScreen"
-        ><!--
+        
         WindowStyle="None" AllowsTransparency="False"
-        -->
+        >
 
     <Grid Name="Body" Background="#00a8ff">
         <Grid.RowDefinitions>
@@ -55,18 +56,17 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Click="Button_Sort" Content="Sort"  Margin="30 20"/>
-                    <Button Grid.Column="2" Click="Button_Search" Content="Search" Margin="30 20"/>
+                    <Button Name="Btn_Sort" Grid.Column="1" Width="450" Height="500" Click="Button_Sort" />
+                    <Button Name="Btn_Search" Grid.Column="2" Width="450" Height="500" Click="Button_Search"/>
 
                 </Grid>
 
-                <Button Grid.Row="2" Content="Exit" Click="Button_Exit" Width="150" Height="50"/>
+                <Button Name="Btn_Exit" BorderBrush="Transparent" Grid.Row="2" Click="Button_Exit" Width="150" Height="50"/>
             
             </Grid>
             <!-- End Intro -->
 
             <Grid Name="Layout" Margin="10"/>
-
             <!-- End Layout -->
         </Grid>
         <!-- Content Window -->
