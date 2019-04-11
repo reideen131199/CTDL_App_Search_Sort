@@ -38,25 +38,37 @@ namespace Project_Search_Sort
 
         #region Event Button on Intro
 
-        private void Button_Sort(object sender, RoutedEventArgs e)
+        private void Border_MouseDown_Sort(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Child_Layout = new Sort_View();
             Layout.Children.Add(Child_Layout);
             goLayout();
-
         }
 
-        private void Button_Search(object sender, RoutedEventArgs e)
+        private void Border_MouseDown_Search(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Child_Layout = new Search_View();
             Layout.Children.Add(Child_Layout);
             goLayout();
         }
 
-        private void Button_Exit(object sender, RoutedEventArgs e)
+        private void Border_MouseDown_Exit(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Close();
         }
+
+        private void Btn_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Border border = (Border)sender;
+            border.BorderThickness = new Thickness(3);
+        }
+
+        private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Border border = (Border)sender;
+            border.BorderThickness = new Thickness(1);
+        }
+
         #endregion
 
         #region Event Button on Layout
@@ -112,5 +124,6 @@ namespace Project_Search_Sort
         }
 
         #endregion
+
     }
 }

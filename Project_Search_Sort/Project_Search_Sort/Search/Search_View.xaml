@@ -18,10 +18,12 @@
         <!-- End List Algorithm Sort -->
 
         <StackPanel Name="LayoutListControl" Grid.Row="1" Orientation="Horizontal">
-            <Button Name="Btn_RandomArr"  Margin="2" Padding="5" Content="Random Array" Click="Button_RandomArr"/>
+            <Button Name="Btn_RandomArr"  Margin="2" Padding="5" Content="Random An Array" Click="Button_RandomArr"/>
             <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="400"  LostFocus="ViewArray_LostFocus"/>
             <TextBlock Text="Value Search" FontSize="16" Margin="2" Padding="5"/>
             <TextBox Name="ValueSearch" Margin="2" Padding="5" MinWidth="50"/>
+            <TextBlock Margin="2" Padding="5" FontSize="16" Text="Speed: "/>
+            <Slider Name="Slider_Time" Value="500" Minimum="100" Maximum="1000" Width="100" Margin="5 10 5 10"/>
             <Button Name="Btn_StartSearch" Margin="2" Padding="5" FontSize="16" Content="Start Search" Click="Button_StartSearch"/>
             <Button Name="Btn_Pause" Margin="2" Padding="5" Content="Pause" Click="Button_Pause" IsEnabled="False"/>
             <Button Name="Btn_End" Margin="2" Padding="5" FontSize="16" Content="End Search" Click="Button_End" IsEnabled="False"/>

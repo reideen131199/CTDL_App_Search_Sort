@@ -18,7 +18,17 @@ namespace Project_Search_Sort
         private Column_Control[] columns;
 
         // Get Set
-        public int Time { get; set; }
+        public int Time
+        {
+            get
+            {
+                return time;
+            }
+            set
+            {
+                time = value;
+            }
+        }
 
         #region Constructor
 
@@ -60,7 +70,7 @@ namespace Project_Search_Sort
         /// Bubble Sort
         /// </summary>
         /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
-        public async void BubbleSort(int k)
+        public async Task BubbleSort(int k)
         {
             for (int i = 1; i < size; i++)
             {
@@ -94,7 +104,7 @@ namespace Project_Search_Sort
         /// Selection Sort
         /// </summary>
         /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
-        public async void SelectionSort(int k)
+        public async Task SelectionSort(int k)
         {
             int ValueTemp;
             for (int i = 1; i < size; i++)
@@ -138,7 +148,7 @@ namespace Project_Search_Sort
         /// Insert Sort
         /// </summary>
         /// <param name="k">If k=1, Increasing. If k=0, Decreasing</param>
-        public async void InsertionSort(int k)
+        public async Task InsertionSort(int k)
         {
             columns[1].col.BgLock();
             for (int i = 2; i <= size; i++)
@@ -169,7 +179,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Quick Sort
         /// </summary>
-        public async void QuickSort()
+        public async Task QuickSort()
         {
             Queue left = new Queue(), right = new Queue();
             left.Enqueue(1);
@@ -273,7 +283,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Shell Sort
         /// </summary>
-        public async void ShellSort()
+        public async Task ShellSort()
         {
             int inc = 4;
             while (inc > 0)
@@ -493,7 +503,7 @@ namespace Project_Search_Sort
         #endregion
 
         #region Helper
-
+        
         /// <summary>
         /// Compare between 2 Value
         /// </summary>
@@ -501,13 +511,21 @@ namespace Project_Search_Sort
         /// <param name="val2">Value 2</param>
         /// <param name="type">If type=1, val1 > val2. If type=0, val1 ... val2 (ahihi) </param>
         /// <returns></returns>
-        protected bool CompareValue(int val1, int val2, int type)
+        private bool CompareValue(int val1, int val2, int type)
         {
             if (type == 1)
                 return val1 > val2;
             return val1 < val2;
         }
 
+        /// <summary>
+        /// BgLock for all columns
+        /// </summary>
+        public void LockAll()
+        {
+            for (int i = 1; i <= size; i++)
+                columns[i].col.BgLock();
+        }
         #endregion
     }
 }

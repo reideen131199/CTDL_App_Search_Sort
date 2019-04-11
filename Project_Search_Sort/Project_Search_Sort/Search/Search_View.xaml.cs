@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace Project_Search_Sort
 {
@@ -26,6 +27,7 @@ namespace Project_Search_Sort
             CreateLayoutListSort();
             chosseAlgorithm = AlgorithmSorts[0];
             chosseAlgorithm.FontWeight = FontWeights.Bold;
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.AntiqueWhite);
 
             ViewAnimation = new ViewColumnSearch_Control(new int[0]);
             LayoutAnimation.Children.Add(ViewAnimation);
@@ -41,9 +43,10 @@ namespace Project_Search_Sort
         private void CreateLayoutListSort()
         {
             string[] st = {
-                "Linear",
-                "Binary",
-                "Binary_Search_Tree"
+                "Linear_Search",
+                //"Binary_Search_Tree",
+                "Binary_Search"
+                
             };
 
             AlgorithmSorts = new List<TextBlock>();
@@ -69,9 +72,11 @@ namespace Project_Search_Sort
         /// <param name="e"></param>
         private void TextBlock_SelecAlgSort(object sender, RoutedEventArgs e)
         {
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.Transparent);
             chosseAlgorithm.FontWeight = FontWeights.Normal;
             chosseAlgorithm = (TextBlock)sender;
             chosseAlgorithm.FontWeight = FontWeights.Bold;
+            chosseAlgorithm.Background = new SolidColorBrush(Colors.AntiqueWhite);
         }
 
         #endregion
@@ -86,6 +91,8 @@ namespace Project_Search_Sort
             Btn_Pause.Content = "Pause";
             Btn_End.IsEnabled = true;
             Btn_StartSearch.IsEnabled = false;
+            Slider_Time.IsEnabled = false;
+            ValueSearch.IsEnabled = false;
         }
 
         private void NotSearching()
@@ -101,6 +108,8 @@ namespace Project_Search_Sort
             Btn_StartSearch.IsEnabled = true;
             Btn_Pause.IsEnabled = false;
             Btn_End.IsEnabled = false;
+            Slider_Time.IsEnabled = true;
+            ValueSearch.IsEnabled = true;
         }
 
         #endregion
@@ -117,32 +126,52 @@ namespace Project_Search_Sort
             // Send arr to Layout Animation Algorithm
             ViewAnimation = new ViewColumnSearch_Control(arr);
             LayoutAnimation.Children.Add(ViewAnimation);
+
+            Btn_RandomArr.Content = Slider_Time.Value.ToString();
         }
 
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
         {
             // Send ViewArray.Text to Layout Animation Algorithm
-            ConvertStringToArr(ViewArray.Text);
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+
+            if (arr.Length != 0 && !CheckArr(arr)) return;
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSearch_Control(arr);
+            LayoutAnimation.Children.Add(ViewAnimation);
+
         }
 
         private void Button_StartSearch(object sender, RoutedEventArgs e)
         {
             // Check Arr
+            CheckArr(ConvertStringToArr(ViewArray.Text));
+
+            // Check Value Find
+            int val = new int();
+            if (ValueSearch.Text == "")
+            {
+                ShowError("Chưa có giá trị cần tìm!!");
+                return;
+            }
+            else if (!Int32.TryParse(ValueSearch.Text, out val))
+            {
+                ShowError("Giá trị tìm kiếm không hợp lệ!!");
+                return;
+            }
+
+
             Btn_RandomArr.IsEnabled = false;
             ViewArray.IsEnabled = false;
             Searching();
 
-            // Check Value Find
 
             // Remove ViewAnimation old
             LayoutAnimation.Children.Remove(ViewAnimation);
 
-            // Send arr and Create ViewAnimation new
-            ViewAnimation = new ViewColumnSearch_Control(ConvertStringToArr(ViewArray.Text));
-            LayoutAnimation.Children.Add(ViewAnimation);
-
             // Run Animation Layout Search
-            run(chosseAlgorithm.Name, Int16.Parse(ValueSearch.Text));
+            run(chosseAlgorithm.Name, val);
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -161,6 +190,17 @@ namespace Project_Search_Sort
 
         private void Button_End(object sender, RoutedEventArgs e)
         {
+            // Read Array
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSearch_Control(arr);
+            ViewAnimation.SearchFast(Int16.Parse(ValueSearch.Text));
+            LayoutAnimation.Children.Add(ViewAnimation);
+
             //End Sort
             Searched();
         }
@@ -170,6 +210,27 @@ namespace Project_Search_Sort
         #endregion
 
         #region Helper
+
+        /// <summary>
+        /// Check Array
+        /// </summary>
+        /// <param name="arr">Array need check</param>
+        /// <returns></returns>
+        private bool CheckArr(int[] arr)
+        {
+            int length = arr.Length;
+            if (length == 0)
+            {
+                ShowError("Giá trị của mảng không đúng!!!");
+                return false;
+            }
+            else if (length > 20)
+            {
+                ShowError("Độ dài mảng không quá 20 phần tử");
+                return false;
+            }
+            return true;
+        }
 
         /// <summary>
         /// Array begin from 0
@@ -209,22 +270,42 @@ namespace Project_Search_Sort
         /// <summary>
         /// Call function Sort chossed
         /// </summary>
-        public void run(string st, int Value)
+        public async void run(string st, int Value)
         {
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSearch_Control(ConvertStringToArr(ViewArray.Text));
+            ViewAnimation.Time = (int)Slider_Time.Value;
+            LayoutAnimation.Children.Add(ViewAnimation);
+
             switch (st)
             {
-                case "Binary":
-                    ViewAnimation.Binary(Value);
-                    break;
+                case "Binary_Search":
+                    
+                    // Read Array
+                    int[] arr = ConvertStringToArr(ViewArray.Text);
+                    Array.Sort(arr);
 
+                    // Remove ViewAnimation old
+                    LayoutAnimation.Children.Remove(ViewAnimation);
+
+                    // Send arr and Create ViewAnimation new
+                    ViewAnimation = new ViewColumnSearch_Control(arr);
+                    LayoutAnimation.Children.Add(ViewAnimation);
+
+                    await ViewAnimation.Binary(Value);
+                    break;
+                
+                /*
                 case "Binary_Search_Tree":
                     ViewAnimation.BinarySearchTree(Value);
                     break;
+                */
 
                 default:
-                    ViewAnimation.Linear(Value);
+                    await ViewAnimation.Linear(Value);
                     break;
             }
+            Searched();
         }
 
         /// <summary>
@@ -233,7 +314,7 @@ namespace Project_Search_Sort
         /// <param name="err">Error</param>
         private void ShowError(string err)
         {
-
+            MessageBox.Show(err, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         #endregion

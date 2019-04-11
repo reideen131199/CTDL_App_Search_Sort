@@ -45,15 +45,15 @@ namespace Project_Search_Sort
         private void CreateLayoutListSort()
         {
             string[] st = {
-                "Bubble",
-                "Selection",
-                "Insert",
-                "Shell",
-                "Quick",
-                "Merge",
-                "Radix",
-                "Heap",
-                "Counting"
+                "Bubble_Sort",
+                "Selection_Sort",
+                "Insert_Sort",
+                "Shell_Sort",
+                "Quick_Sort",
+                "Merge_Sort",
+                "Radix_Sort",
+                //"Heap",
+                "Counting_Sort"
             };
 
             AlgorithmSorts = new List<TextBlock>();
@@ -61,7 +61,7 @@ namespace Project_Search_Sort
             {
                 TextBlock textBlock = new TextBlock();
                 textBlock.Name = s;
-                textBlock.Text = s;
+                textBlock.Text = s.Replace("_", " ");
                 textBlock.FontSize = 16;
                 textBlock.TextAlignment = TextAlignment.Center;
                 textBlock.Margin = new Thickness(0, 3, 0, 3);
@@ -98,6 +98,7 @@ namespace Project_Search_Sort
             Btn_Pause.Content = "Pause";
             Btn_End.IsEnabled = true;
             Btn_StartSort.IsEnabled = false;
+            Slider_Time.IsEnabled = false;
         }
 
         private void NotSorting()
@@ -114,6 +115,7 @@ namespace Project_Search_Sort
             Btn_StartSort.IsEnabled = true;
             Btn_Pause.IsEnabled = false;
             Btn_End.IsEnabled = false;
+            Slider_Time.IsEnabled = true;
         }
 
         #endregion
@@ -193,12 +195,20 @@ namespace Project_Search_Sort
         private void ViewArray_LostFocus(object sender, RoutedEventArgs e)
         {
             // Send ViewArray.Text to Layout Animation Algorithm
-            ConvertStringToArr(ViewArray.Text);
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+
+            if (arr.Length !=0 && !CheckArr(arr)) return;
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSort_Control(arr);
+            LayoutAnimation.Children.Add(ViewAnimation);
         }
 
         private void Button_StartSort(object sender, RoutedEventArgs e)
         {
             // Check Arr
+            CheckArr(ConvertStringToArr(ViewArray.Text));
+
             Btn_RandomArr.IsEnabled = false;
             Btn_Sorted.IsEnabled = false;
             ViewArray.IsEnabled = false;
@@ -206,9 +216,9 @@ namespace Project_Search_Sort
 
             // Remove ViewAnimation old
             LayoutAnimation.Children.Remove(ViewAnimation);
-
+            
             // Run Animation Layout Sort
-            run(chosseAlgorithm.Text);
+            run(chosseAlgorithm.Name);
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -227,7 +237,18 @@ namespace Project_Search_Sort
 
         private void Button_End(object sender, RoutedEventArgs e)
         {
-            //End Sort
+            // Read Array
+            int[] arr = ConvertStringToArr(ViewArray.Text);
+            Array.Sort(arr);
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSort_Control(arr);
+            ViewAnimation.LockAll();
+            LayoutAnimation.Children.Add(ViewAnimation);
+
             Sorted();
         }
 
@@ -236,6 +257,27 @@ namespace Project_Search_Sort
         #endregion
 
         #region Helper
+
+        /// <summary>
+        /// Check Array
+        /// </summary>
+        /// <param name="arr">Array need check</param>
+        /// <returns></returns>
+        private bool CheckArr(int[] arr)
+        {
+            int length = arr.Length;
+            if (length == 0)
+            {
+                ShowError("Giá trị của mảng không đúng!!!");
+                return false;
+            }
+            else if (length > 20)
+            {
+                ShowError("Độ dài mảng không quá 20 phần tử");
+                return false;
+            }
+            return true;
+        }
 
         /// <summary>
         /// Array begin from 0
@@ -261,34 +303,47 @@ namespace Project_Search_Sort
         {
             // Send arr and Create ViewAnimation new
             ViewAnimation = new ViewColumnSort_Control(ConvertStringToArr(ViewArray.Text));
+            ViewAnimation.Time = (int)Slider_Time.Value;
             LayoutAnimation.Children.Add(ViewAnimation);
 
             switch (st)
             {
-                case "Selection":
-                    ViewAnimation.SelectionSort(1);
+                case "Selection_Sort":
+                    await ViewAnimation.SelectionSort(1);
+                    break;
+                      
+                case "Insert_Sort":
+                    await ViewAnimation.InsertionSort(1);
                     break;
 
-                case "Insert":
-                    ViewAnimation.InsertionSort(1);
+                case "Quick_Sort":
+                    await ViewAnimation.QuickSort();
                     break;
 
-                case "Quick":
-                    ViewAnimation.QuickSort();
+                case "Shell_Sort":
+                    await ViewAnimation.ShellSort();
                     break;
 
-                case "Shell":
-                    ViewAnimation.ShellSort();
-                    break;
-
-                case "Merge":
+                case "Merge_Sort":
                     await ViewAnimation.MergeSort_Recursive(1, -1);
                     break;
 
+                case "Radix_Sort":
+                    // await
+                    break;
+                case "Heap_Sort":
+                    // await
+                    break;
+
+                case "Counting_Sort":
+                    // await
+                    break;
+
                 default:
-                    ViewAnimation.BubbleSort(1);
+                    await ViewAnimation.BubbleSort(1);
                     break;
             }
+            Sorted();
         }
 
         /// <summary>
@@ -315,7 +370,7 @@ namespace Project_Search_Sort
         /// <param name="err">Error</param>
         private void ShowError(string err)
         {
-
+            MessageBox.Show(err, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
         #endregion

@@ -16,10 +16,21 @@ namespace Project_Search_Sort
         private Column_Control[] columns;
         private double Bot = -280;
 
+        private int[] arr;
         #endregion
 
         // Get Set Time
-        public int Time { get; set; }
+        public int Time
+        {
+            get
+            {
+                return time;
+            }
+            set
+            {
+                time = value;
+            }
+        }
 
         #region Constructor
 
@@ -34,20 +45,12 @@ namespace Project_Search_Sort
             int[] dest = new int[a.Length + 1];
             Array.Copy(a, 0, dest, 1, a.Length);
 
-            // CreateCol
             size = (dest.Length < 1) ? 0 : dest.Length - 1;
             columns = new Column_Control[size + 1];
 
-            for (int i = 1; i <= size; i++)
-            {
-                columns[i] = new Column_Control();
-                columns[i].col.Val = dest[i];
-                Canvas.SetBottom(columns[i], 0);
-                Canvas.SetLeft(columns[i], (i - 1) * 40);
-                LayoutAnimation.Children.Add(columns[i]);
-            }
+            CreateCol(dest);
 
-            LayoutAnimation.Width = size * 40;
+            arr = dest;
         }
 
         #endregion
@@ -59,7 +62,7 @@ namespace Project_Search_Sort
         /// Algorithm Search Linear
         /// </summary>
         /// <param name="Value">Value need find</param>
-        public async void Linear(int Value)
+        public async Task Linear(int Value)
         {
             int i = 1;
             for (i=1; i<=size; i++)
@@ -86,14 +89,58 @@ namespace Project_Search_Sort
         /// Algorithm Binary Search
         /// </summary>
         /// <param name="Value"></param>
-        public async void Binary(int Value)
+        public async Task Binary(int Value)
         {
-            BlockCompare.Text = "Binary Search";
+            int left = 1, right = size, mid = left;
+            
+            columns[left].col.BgKey();
+            columns[right].col.BgKey();
+            await Task.Delay(time);
+
+            while (left <= right && mid <= right && mid >= left)
+            {
+                mid = (left + right) / 2;
+                columns[mid].col.BgCompare();
+                await Task.Delay(time);
+
+                if (columns[mid].col.Val == Value)
+                {
+                    columns[left].col.BgDefault();
+                    columns[right].col.BgDefault();
+
+                    columns[mid].col.BgLock();
+
+                    AnimationColumn.MoveColY(columns[mid], Bot, time);
+                    AnimationColumn.MoveColX(columns[mid], (size / 2 - 1) * 40, time);
+                    return;
+                }
+                else if (columns[mid].col.Val > Value)
+                {
+                    columns[right].col.BgDefault();
+                    columns[mid].col.BgDefault();
+                    right = mid - 1;
+                    columns[right].col.BgKey();
+                }
+                else
+                {
+                    columns[left].col.BgDefault();
+                    columns[mid].col.BgDefault();
+                    left = mid + 1;
+                    columns[left].col.BgKey();
+                    
+                }
+
+                await Task.Delay(time);
+            }
+
+            columns[left].col.BgDefault();
+            columns[right].col.BgDefault();
+            if (columns[mid].col.Val != Value) BlockCompare.Text = "Not Found!!";
         }
 
         #endregion
 
-        #region Binary Search Tree
+        /* #region Binary Search Tree
 
         /// <summary>
         /// Algorithm Binary Search Tree
@@ -105,8 +152,45 @@ namespace Project_Search_Sort
         }
 
         #endregion
+        */
 
         #endregion
 
+        #region Helper
+        
+        /// <summary>
+        /// Search not Animation
+        /// </summary>
+        /// <param name="Value">Value need find</param>
+        public void SearchFast(int Value)
+        {
+            int i = 1;
+            for (i = 1; i <= size; i++)
+            {
+                if (columns[i].col.Val == Value)
+                {
+                    AnimationColumn.MoveColY(columns[i], Bot, time);
+                    AnimationColumn.MoveColX(columns[i], (size / 2 - 1) * 40, time);
+                    columns[i].col.BgLock();
+                    break;
+                }
+            }
+            if (i > size) BlockCompare.Text = "Not Found!!!";
+        }
+
+        private void CreateCol(int[] dest)
+        {
+            for (int i = 1; i <= size; i++)
+            {
+                columns[i] = new Column_Control();
+                columns[i].col.Val = dest[i];
+                Canvas.SetBottom(columns[i], 0);
+                Canvas.SetLeft(columns[i], (i - 1) * 40);
+                LayoutAnimation.Children.Add(columns[i]);
+            }
+
+            LayoutAnimation.Width = size * 40;
+        }
+        #endregion
     }
 }

@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Search_Sort"
         mc:Ignorable="d"
-        Icon="icon.ico"
-        Title="MainWindow" 
+        Icon="icon.ico" Title="MainWindow" 
         Height="745" Width="900" MinHeight="745" MinWidth="900"
-        WindowStartupLocation="CenterScreen"
         
+        WindowState="Maximized"
         WindowStyle="None" AllowsTransparency="False"
         >
 
@@ -56,12 +55,13 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="Btn_Sort" Grid.Column="1" Width="450" Height="500" Click="Button_Sort" />
-                    <Button Name="Btn_Search" Grid.Column="2" Width="450" Height="500" Click="Button_Search"/>
+
+                    <Border Name="Btn_Search" Grid.Column="1" Width="450" Height="500" CornerRadius="10" BorderBrush="Aqua" BorderThickness="1" MouseDown="Border_MouseDown_Search" MouseMove="Btn_MouseMove" MouseLeave="Btn_MouseLeave"/>
+                    <Border Name="Btn_Sort" Grid.Column="2" Width="450" Height="500" CornerRadius="10" BorderBrush="Aqua" BorderThickness="1" MouseDown="Border_MouseDown_Sort" MouseMove="Btn_MouseMove" MouseLeave="Btn_MouseLeave"/>
 
                 </Grid>
 
-                <Button Name="Btn_Exit" BorderBrush="Transparent" Grid.Row="2" Click="Button_Exit" Width="150" Height="50"/>
+                <Border Name="Btn_Exit" Grid.Row="2" Width="150" Height="50" BorderBrush="Aqua" CornerRadius="10" BorderThickness="1" MouseDown="Border_MouseDown_Exit" MouseMove="Btn_MouseMove" MouseLeave="Btn_MouseLeave"/>
             
             </Grid>
             <!-- End Intro -->
