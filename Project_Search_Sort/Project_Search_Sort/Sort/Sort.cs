@@ -134,32 +134,18 @@ namespace Project_Search_Sort.Sort
         /// Insert
         /// </summary>
         /// <param name="k"></param>
-        public void InsertionSort(int k)
+        public void InsertionSort()
         {
             for (int i = 2; i <= size; i++)
             {
                 int h = arr[i];
-                for (int j = 1; j <= i-1; j++)
+                int j = i;
+                while (j - 1 > 0 && h < arr[j-1])
                 {
-                    if (k == 1)
-                    {
-                        if (h >= arr[j])
-                        {
-                            for (int l = i; l > j; l--) arr[l] = arr[l-1];
-                            arr[j] = h;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (h <= arr[j])
-                        {
-                            for (int l = i; l > j; l--) arr[l] = arr[l - 1];
-                            arr[j] = h;
-                            break;
-                        }
-                    }
+                    arr[j] = arr[j-1];
+                    j--;
                 }
+                arr[j] = h;
             }
         }
         #endregion
@@ -252,14 +238,14 @@ namespace Project_Search_Sort.Sort
         public void ShellSort()
         {
             int i, j, inc, temp;
-            inc = 3;
+            inc = 4;
             while (inc > 0)
             {
-                for (i = 0; i < size; i++)
+                for (i = 1; i <= size; i++)
                 {
                     j = i;
                     temp = arr[i];
-                    while ((j >= inc) && (arr[j - inc] > temp))
+                    while ((j > inc) && (arr[j - inc] > temp))
                     {
                         arr[j] = arr[j - inc];
                         j = j - inc;
