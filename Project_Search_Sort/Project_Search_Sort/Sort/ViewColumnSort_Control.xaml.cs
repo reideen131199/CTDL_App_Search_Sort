@@ -521,22 +521,58 @@ namespace Project_Search_Sort
             {
                 borderArr[i] = new Border();
                 borderArr[i] = createBorder((i - 1) * 40, Top);
+                borderArr[i].VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                borderArr[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 borderArr[i].Width = textBlockArr[i].Width + 3;
-                borderArr[i].Height = textBlockArr[i].Height + 3;
+                borderArr[i].Height = 40;
                 LayoutAnimation.Children.Add(borderArr[i]);
             }
 
             // Create Col Count. 1 to 9
             LayoutCount.Width = 9 * 40;
-            TextBlock[] textBlock = new TextBlock[10];
+            TextBlock[] textBlockIndex = new TextBlock[10];
             for (int i = 1; i <= 9; i++)
             {
-                textBlock[i] = new TextBlock();
-                textBlock[i] = createTextValueCol(i.ToString(), (i - 1) * 40, 0);
-                LayoutCount.Children.Add(textBlock[i]);
+                textBlockIndex[i] = new TextBlock();
+                textBlockIndex[i] = createTextValueCol(i.ToString(), (i - 1) * 40, 0);
+                LayoutCount.Children.Add(textBlockIndex[i]);
             }
             LayoutCount.Width = 9 * 40;
-                        
+
+            LayoutCount.Width = 9 * 40;
+            TextBlock[] textBlockCount = new TextBlock[10];
+            for (int i = 1; i <= 9; i++)
+            {
+                textBlockCount[i] = new TextBlock();
+                textBlockCount[i] = createTextValueCol(0.ToString(), (i - 1) * 40, 30);
+                LayoutCount.Children.Add(textBlockCount[i]);
+            }
+            LayoutCount.Width = 9 * 40;
+
+            Border[] borderCount = new Border[10];
+            for (int i = 1; i <= 9; i++)
+            {
+                borderCount[i] = new Border();
+                borderCount[i] = createBorder((i - 1) * 40, 30);
+                borderCount[i].VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                borderCount[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                borderCount[i].Width = textBlockArr[i].Width + 3;
+                borderCount[i].Height = 40;
+                LayoutCount.Children.Add(borderCount[i]);
+            }
+
+            Border[] borderCopy = new Border[size + 1];
+            for (int i = 1; i <= size; i++)
+            {
+                borderCopy[i] = new Border();
+                borderCopy[i] = createBorder((i - 1) * 40, Top);
+                borderCopy[i].VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                borderCopy[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                borderCopy[i].Width = textBlockArr[i].Width + 3;
+                borderCopy[i].Height = 40;
+                LayoutAnimation.Children.Add(borderCopy[i]);
+            }
+
             /*
             for (int i = 1; i <= size; i++)
             {
