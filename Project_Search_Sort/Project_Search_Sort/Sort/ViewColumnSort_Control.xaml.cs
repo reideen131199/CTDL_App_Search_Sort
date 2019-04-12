@@ -67,7 +67,7 @@ namespace Project_Search_Sort
         #region Algorithm Sort      Canvas.Bottom: -280(Insert Sort, Merge)
 
         private double Bot = -280;
-        private double Top = 200;
+        //private double Top = 200;
 
         #region Bubble Sort
         /// <summary>
@@ -229,8 +229,8 @@ namespace Project_Search_Sort
                         await Task.Delay(time);
                         columns[i].col.BgDefault();
                         i++;
-                        columns[i].col.BgCompare();
-
+                        if (i <= size) columns[i].col.BgCompare();
+                        else break;
                         // Pause
                         if (pause) await PauseAnimation();
 
@@ -238,12 +238,14 @@ namespace Project_Search_Sort
                     await Task.Delay(time);
 
                     columns[j].col.BgCompare();
-                    while (columns[j].col.Val > m.col.Val)
+                    while (columns[j].col.Val > m.col.Val && j-1>=1)
                     {
                         await Task.Delay(time);
                         columns[j].col.BgDefault();
                         j--;
-                        columns[j].col.BgCompare();
+                        if (j >= 1) columns[j].col.BgCompare();
+                        else
+                            break;
 
                         // Pause
                         if (pause) await PauseAnimation();
@@ -283,8 +285,8 @@ namespace Project_Search_Sort
                 if (l > j)
                 {
                     columns[l].col.BgLock();
-                    columns[l - 1].col.BgLock();    // Error
-                    columns[j].col.BgLock();
+                    if (l - 1 > 0) columns[l - 1].col.BgLock();    // Error
+                    if (j >= 1) columns[j].col.BgLock();
                 }
 
                 if (l < j)
@@ -293,14 +295,15 @@ namespace Project_Search_Sort
                     right.Enqueue(j);
                 }
 
-
+                
+                    
                 if (i == r) columns[i].col.BgLock();
 
                 if (r < i)
                 {
                     columns[r].col.BgLock();
                     columns[i - 1].col.BgLock();
-                    columns[i].col.BgLock();
+                    if (i <= size) columns[i].col.BgLock();
                 }
 
                 if (i < r)
@@ -494,7 +497,7 @@ namespace Project_Search_Sort
         #endregion
 
         #region Counting       Add new Control
-
+        /*
         /// <summary>
         /// Counting
         /// </summary>
@@ -573,7 +576,7 @@ namespace Project_Search_Sort
                 LayoutAnimation.Children.Add(borderCopy[i]);
             }
 
-            /*
+            
             for (int i = 1; i <= size; i++)
             {
                 count[columns[i].col.Val]++;
@@ -592,7 +595,7 @@ namespace Project_Search_Sort
                 columns[count[copy[i].col.Val]] = copy[i];
                 count[copy[i].col.Val] -= 1;
             }
-            */
+            
             //arr = count;
         }
 
@@ -617,7 +620,7 @@ namespace Project_Search_Sort
             Canvas.SetLeft(t, posLeft);
             return t;
         }
-
+        */
         #endregion
 
         #endregion

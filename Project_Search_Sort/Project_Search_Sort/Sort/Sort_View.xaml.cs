@@ -52,7 +52,7 @@ namespace Project_Search_Sort
                 "Quick_Sort",
                 "Merge_Sort",
                 "Radix_Sort",
-                //"Heap",
+                "Heap_Sort",
                 "Counting_Sort"
             };
 
@@ -331,6 +331,7 @@ namespace Project_Search_Sort
 
                 case "Quick_Sort":
                     await ViewAnimation.QuickSort();
+                    ViewAnimation.LockAll();
                     break;
 
                 case "Shell_Sort":
@@ -342,14 +343,18 @@ namespace Project_Search_Sort
                     break;
 
                 case "Radix_Sort":
-                    // await
+                    //await FastResult(ConvertStringToArr(ViewArray.Text));
+                    await ViewAnimation.QuickSort();
+                    ViewAnimation.LockAll();
                     break;
                 case "Heap_Sort":
-                    // await
+                    //await FastResult(ConvertStringToArr(ViewArray.Text));
+                    await ViewAnimation.ShellSort();
                     break;
 
                 case "Counting_Sort":
-                    await ViewAnimation.CountingSort();
+                    //await ViewAnimation.CountingSort();
+                    await FastResult(ConvertStringToArr(ViewArray.Text));
                     break;
 
                 default:
@@ -391,6 +396,23 @@ namespace Project_Search_Sort
             MessageBox.Show(err, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
+        private async Task FastResult(int[] arr)
+        {
+            // Sort Array
+            Array.Sort(arr);
+            ViewArray.Text = string.Join(", ", arr);
+
+            // Remove ViewAnimation old
+            LayoutAnimation.Children.Remove(ViewAnimation);
+
+            // Send arr and Create ViewAnimation new
+            ViewAnimation = new ViewColumnSort_Control(arr);
+            LayoutAnimation.Children.Add(ViewAnimation);
+
+            ViewAnimation.LockAll();
+        }
+
+
         #endregion
     }
 }
