@@ -12,7 +12,7 @@ namespace Project_Search_Sort
     /// </summary>
     public partial class ViewColumnSort_Control : UserControl
     {
-        //private int[] arr;
+        private int[] arr;
         private int size;
         private int time = 100;
         private Column_Control[] columns;
@@ -22,7 +22,7 @@ namespace Project_Search_Sort
         public int Time
         {
             get { return time; }
-            set { time = value; }
+            set { time = 1100 - value; }
         }
 
         public bool Pause
@@ -58,6 +58,8 @@ namespace Project_Search_Sort
             }
 
             LayoutAnimation.Width = size * 40;
+
+            arr = dest;
         }
 
         #endregion
@@ -65,6 +67,7 @@ namespace Project_Search_Sort
         #region Algorithm Sort      Canvas.Bottom: -280(Insert Sort, Merge)
 
         private double Bot = -280;
+        private double Top = 200;
 
         #region Bubble Sort
         /// <summary>
@@ -491,31 +494,50 @@ namespace Project_Search_Sort
         #endregion
 
         #region Counting       Add new Control
-        /*
+
         /// <summary>
         /// Counting
         /// </summary>
-        public async void CountingSort()
+        public async Task CountingSort()
         {
+            removeAllCol();
+            
             int[] count = new int[10];
             Column_Control[] copy = columns;
             int maxx = columns[1].col.Val;
 
-            // Create Col Count. 1 to 9
-            Canvas layoutCount = new Canvas();
-            layoutCount.Width = 9 * 40;
-            Grid.SetRow(layoutCount, 2);
+            // Create Arr
+            LayoutCount.Width = 9 * 40;
+            TextBlock[] textBlockArr = new TextBlock[size + 1];
+            for (int i = 1; i <= size; i++)
+            {
+                textBlockArr[i] = new TextBlock();
+                textBlockArr[i] = createTextValueCol(columns[i].col.Val.ToString(), (i - 1) * 40, Top);
+                LayoutAnimation.Children.Add(textBlockArr[i]);
+            }
 
+            Border[] borderArr = new Border[size + 1];
+            for (int i = 1; i <= size; i++)
+            {
+                borderArr[i] = new Border();
+                borderArr[i] = createBorder((i - 1) * 40, Top);
+                borderArr[i].Width = textBlockArr[i].Width + 3;
+                borderArr[i].Height = textBlockArr[i].Height + 3;
+                LayoutAnimation.Children.Add(borderArr[i]);
+            }
+
+            // Create Col Count. 1 to 9
+            LayoutCount.Width = 9 * 40;
             TextBlock[] textBlock = new TextBlock[10];
             for (int i = 1; i <= 9; i++)
             {
                 textBlock[i] = new TextBlock();
-                textBlock[i] = createTextValueCol(i.ToString(), (i - 1) * 40);
-                layoutCount.Children.Add(textBlock[i]);
+                textBlock[i] = createTextValueCol(i.ToString(), (i - 1) * 40, 0);
+                LayoutCount.Children.Add(textBlock[i]);
             }
-            Wrap.Children.Add(layoutCount);
-            BlockCompare.Text = layoutCount.ActualHeight.ToString();
-
+            LayoutCount.Width = 9 * 40;
+                        
+            /*
             for (int i = 1; i <= size; i++)
             {
                 count[columns[i].col.Val]++;
@@ -534,28 +556,47 @@ namespace Project_Search_Sort
                 columns[count[copy[i].col.Val]] = copy[i];
                 count[copy[i].col.Val] -= 1;
             }
-
+            */
             //arr = count;
         }
 
-        private TextBlock createTextValueCol(string text, double posLeft)
+        private TextBlock createTextValueCol(string text, double posLeft, double posBottom)
         {
             TextBlock t = new TextBlock();
             t.Text = text;
             t.FontSize = 24;
             t.Width = 30;
             t.TextAlignment = System.Windows.TextAlignment.Center;
-            Canvas.SetBottom(t, 0);
+            Canvas.SetBottom(t, posBottom);
             Canvas.SetLeft(t, posLeft);
             return t;
         }
-        */
+
+        private Border createBorder(double posLeft, double posBottom)
+        {
+            Border t = new Border();
+            t.BorderBrush = new SolidColorBrush(Colors.Black);
+            t.BorderThickness = new System.Windows.Thickness(3);
+            Canvas.SetBottom(t, posBottom);
+            Canvas.SetLeft(t, posLeft);
+            return t;
+        }
+
         #endregion
 
         #endregion
 
         #region Helper
-        
+
+        /// <summary>
+        /// Remove All Columns
+        /// </summary>
+        private void removeAllCol()
+        {
+            for (int i=1; i<=size; i++)
+                LayoutAnimation.Children.Remove(columns[i]);
+        }
+
         /// <summary>
         /// Compare between 2 Value
         /// </summary>

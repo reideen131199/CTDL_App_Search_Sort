@@ -36,8 +36,12 @@
             
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Border Width="106"/>
-                <Button Name="Btn_Increasing" Margin="5" Padding="3" Content="Increasing" Click="Button_Sort_Increasing" Visibility="Collapsed"/>
-                <Button Name="Btn_Decreasing" Margin="5" Padding="3" Content="Decreasing" Click="Button_Sort_Decreasing" Visibility="Collapsed"/>
+                <Button Name="Btn_Increasing" Margin="5" Padding="3" Content="Increasing" Click="Button_Sort_Increasing"/>
+                <Button Name="Btn_Decreasing" Margin="5" Padding="3" Content="Decreasing" Click="Button_Sort_Decreasing"/>
+                <TextBlock Width="375"/>
+                <TextBlock Text="Min"/>
+                <TextBlock Width="70"/>
+                <TextBlock Text="Max"/>
             </StackPanel>
         </Grid>
         <!-- End List Control Layout Sort -->

@@ -211,7 +211,7 @@ namespace Project_Search_Sort
         private void Button_StartSort(object sender, RoutedEventArgs e)
         {
             // Check Arr
-            CheckArr(ConvertStringToArr(ViewArray.Text));
+            if (!CheckArr(ConvertStringToArr(ViewArray.Text))) return;
 
             Btn_RandomArr.IsEnabled = false;
             Btn_Sorted.IsEnabled = false;
@@ -279,9 +279,14 @@ namespace Project_Search_Sort
                 ShowError("Giá trị của mảng không đúng!!!");
                 return false;
             }
-            else if (length > 20)
+            else if (length == 1 && arr[0] == -1)
             {
-                ShowError("Độ dài mảng không quá 20 phần tử");
+                ShowError("Giá trị của mỗi phần tử chỉ từ 1 đến 50");
+                return false;
+            }
+            else if (length > 20 || length < 3)
+            {
+                ShowError("Độ dài mảng lớn hơn 2 và không quá 20 phần tử");
                 return false;
             }
             return true;
@@ -344,7 +349,7 @@ namespace Project_Search_Sort
                     break;
 
                 case "Counting_Sort":
-                    // await
+                    await ViewAnimation.CountingSort();
                     break;
 
                 default:
@@ -368,6 +373,11 @@ namespace Project_Search_Sort
             {
                 if (!Int32.TryParse(Sts[i], out a[i]))
                     return new int[0];
+                if (a[i] > 50 || a[i] < 1)
+                {
+                    int[] ar = new int[1] { -1 };
+                    return ar;
+                }
             }
             return a;
         }

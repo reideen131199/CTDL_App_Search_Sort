@@ -24,7 +24,7 @@ namespace Project_Search_Sort
         public int Time
         {
             get { return time; }
-            set { time = value; }
+            set { time = 1100 - value; }
         }
 
         public bool Pause
