@@ -79,8 +79,8 @@ namespace Project_Search_Sort
                 await Task.Delay(time);
                 if (columns[i].col.Val == Value)
                 {
-                    AnimationColumn.MoveColY(columns[i], Bot, time);
-                    AnimationColumn.MoveColX(columns[i], (size / 2 - 1) * 40, time);
+                    AnimationControl.MoveColY(columns[i], Bot, time);
+                    AnimationControl.MoveColX(columns[i], (size / 2 - 1) * 40, time);
                     columns[i].col.BgLock();
                     break;
                 }
@@ -128,8 +128,8 @@ namespace Project_Search_Sort
 
                     columns[mid].col.BgLock();
 
-                    AnimationColumn.MoveColY(columns[mid], Bot, time);
-                    AnimationColumn.MoveColX(columns[mid], (size / 2 - 1) * 40, time);
+                    AnimationControl.MoveColY(columns[mid], Bot, time);
+                    AnimationControl.MoveColX(columns[mid], (size / 2 - 1) * 40, time);
                     return;
                 }
                 else if (columns[mid].col.Val > Value)
@@ -190,8 +190,8 @@ namespace Project_Search_Sort
             {
                 if (columns[i].col.Val == Value)
                 {
-                    AnimationColumn.MoveColY(columns[i], Bot, time);
-                    AnimationColumn.MoveColX(columns[i], (size / 2 - 1) * 40, time);
+                    AnimationControl.MoveColY(columns[i], Bot, time);
+                    AnimationControl.MoveColX(columns[i], (size / 2 - 1) * 40, time);
                     columns[i].col.BgLock();
                     break;
                 }

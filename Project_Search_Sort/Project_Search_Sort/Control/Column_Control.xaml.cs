@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project_Search_Sort
 {
+
     #region Column Control
     /// <summary>
     /// Interaction logic for Column_Control.xaml
@@ -143,69 +144,4 @@ namespace Project_Search_Sort
 
     #endregion
 
-    #region Class Animation for Column Control
-
-    class AnimationColumn
-    {
-        public AnimationColumn() { }
-
-        #region Animation Ox
-        
-        /// <summary>
-        /// Exchange position 2 column control on time
-        /// </summary>
-        /// <param name="col1">Column 1</param>
-        /// <param name="col2">Column 2</param>
-        /// <param name="time">Time Exchange(Miliseconds)</param>
-        public static void ExchangeColX(Column_Control col1, Column_Control col2, double time)
-        {
-            double savePositionControl_1 = Canvas.GetLeft(col1);
-            MoveColX(col1, Canvas.GetLeft(col2), time);
-            MoveColX(col2, savePositionControl_1, time);
-        }
-
-        /// <summary>
-        /// Move control to position pos in comparison with Left panel parent on time
-        /// </summary>
-        /// <param name="control">Column need Move</param>
-        /// <param name="pos">Position in comparison width Left panel parent</param>
-        /// <param name="time">Time move(Miliseconds)</param>
-        public static void MoveColX(Column_Control control, double pos, double time)
-        {
-            DoubleAnimation doubleAnimation = new DoubleAnimation(pos, new Duration(TimeSpan.FromMilliseconds(time)));
-            control.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
-        }
-
-        #endregion
-
-        #region Animation Oy
-        /// <summary>
-        /// Exchange position 2 column control on time 
-        /// </summary>
-        /// <param name="col1">Column 1</param>
-        /// <param name="col2">Column 2</param>
-        /// <param name="time">Time Exchange(Miliseconds)</param>
-        public static void ExchangeColY(Column_Control col1, Column_Control col2, double time)
-        {
-            double savePositionControl_1 = Canvas.GetBottom(col1);
-            MoveColY(col1, Canvas.GetBottom(col2), time);
-            MoveColY(col2, savePositionControl_1, time);
-        }
-
-        /// <summary>
-        /// Move control to position pos in comparison with Bottom panel parent on time
-        /// </summary>
-        /// <param name="control">Column need Move</param>
-        /// <param name="pos">Position in comparison width Bottom panel parent</param>
-        /// <param name="time">Time move(Miliseconds)</param>
-        public static void MoveColY(Column_Control control, double pos, double time)
-        {
-            DoubleAnimation doubleAnimation = new DoubleAnimation(pos, new Duration(TimeSpan.FromMilliseconds(time)));
-            control.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
-        }
-
-        #endregion 
-    }
-
-    #endregion
 }

@@ -6,7 +6,18 @@
              xmlns:local="clr-namespace:Project_Search_Sort"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2"  Background="#fff">
+        <Grid Name="Wrap">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding Path=Height, ElementName=BlockCompare}"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Canvas Name="LayoutAnimation" Grid.Row="0" Margin="5, 20, 5, 0"/>
+
+            <TextBlock Name="BlockCompare" Grid.Row="1" FontSize="24" TextAlignment="Center"/>
+            <Canvas Name="LayoutCount" Grid.Row="1"/>
+
+        </Grid>
+    </Border>
 </UserControl>

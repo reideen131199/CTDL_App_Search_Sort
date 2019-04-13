@@ -5,17 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project_Search_Sort"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="100">
-    <Grid Height="{Binding Path=Height, ElementName=TextBlock_Value}">
-        <Border BorderBrush="LightBlue" BorderThickness="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1.5*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Name="TextBlock_Value" Grid.Row="0" Margin="5" FontSize="24" TextAlignment="Center" Text="{Binding Val}"/>
-                <TextBlock Name="TextBlock_Radix" Grid.Row="1" Margin="1" FontSize="20" TextAlignment="Center" Text=""/>
-            </Grid>
+             d:DesignHeight="60" d:DesignWidth="70" MinWidth="70">
+    <Grid Name="Wrap">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding Path=Height, ElementName=TextBlock_Value}"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Border Name="Border_Value" Grid.Row="0" BorderBrush="Black">
+            <TextBlock Name="TextBlock_Value" FontSize="24" TextAlignment="Center" Text="{Binding Val}"/>
+        </Border>
+
+        <Border Name="Border_Radix" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Padding="0">
+            <TextBlock Name="TextBlock_Radix" Margin="0" FontSize="20" TextAlignment="Center" Text="{Binding Binary}"/>
         </Border>
     </Grid>
 </UserControl>

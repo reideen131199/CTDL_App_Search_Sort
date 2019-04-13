@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Control\AnimationControl.cs" />
     <Compile Include="Control\Column_Control.xaml.cs">
       <DependentUpon>Column_Control.xaml</DependentUpon>
     </Compile>
