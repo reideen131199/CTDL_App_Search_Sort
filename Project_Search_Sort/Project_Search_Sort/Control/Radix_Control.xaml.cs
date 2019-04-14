@@ -38,7 +38,6 @@ namespace Project_Search_Sort
 
             DataContext = radix;
             CreateBinary();
-
         }
 
         #endregion
@@ -105,7 +104,7 @@ namespace Project_Search_Sort
 
         public Radix()
         {
-            Val = (5 << 1);
+            Val = 0;
         }
     }
 }

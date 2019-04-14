@@ -81,24 +81,44 @@ namespace Project_Search_Sort
         {
             chosseAlgorithm.Background = new SolidColorBrush(Colors.Transparent);
             chosseAlgorithm.FontWeight = FontWeights.Normal;
-            chosseAlgorithm = (TextBlock)sender;
+            Sorted();
+
+            TextBlock newChosseAlgorithm = (TextBlock)sender;
+
+            // New ChosseAlgorithm is Coungting Sort
+            if (newChosseAlgorithm.Name == "Counting_Sort" && chosseAlgorithm.Name != "Counting_Sort")
+            {
+                chosseAlgorithm = newChosseAlgorithm;
+
+                int[] arr = CreateRandomArr();
+                ViewArray.Text = string.Join(", ", arr);
+
+                CreateNewView(arr);
+            }
+            // New ChosseAlgorithm is Radix Sort
+            else if (newChosseAlgorithm.Name == "Radix_Sort" && chosseAlgorithm.Name != "Radix_Sort")
+            {
+                chosseAlgorithm = newChosseAlgorithm;
+
+                int[] arr = CreateRandomArr();
+                ViewArray.Text = string.Join(", ", arr);
+
+                CreateNewView(arr);
+            }
+            else
+            {
+                if (chosseAlgorithm.Name != "Radix_Sort" || chosseAlgorithm.Name != "Counting_Sort")
+                {
+                    chosseAlgorithm = newChosseAlgorithm;
+                    int[] arr = CreateRandomArr();
+                    ViewArray.Text = string.Join(", ", arr);
+                }
+
+                CreateNewView(ConvertStringToArr(ViewArray.Text));
+            }
+            
             chosseAlgorithm.FontWeight = FontWeights.Bold;
             chosseAlgorithm.Background = new SolidColorBrush(Colors.AntiqueWhite);
-
-            switch (chosseAlgorithm.Name)
-            {
-                case "Radix":
-
-                    break;
-
-                case "Tree":
-
-                    break;
-
-                default:
-
-                    break;
-            }
         }
 
         #endregion
@@ -292,10 +312,14 @@ namespace Project_Search_Sort
             Random rand = new Random();
             int n = rand.Next(15) + 3;
 
+            int Max = 50;
+            if (chosseAlgorithm.Name == "Counting_Sort")
+                Max = 9;
+
             int[] arr = new int[n];
             for (int i = 0; i < n; i++)
             {
-                arr[i] = rand.Next(50) + 1;
+                arr[i] = rand.Next(Max) + 1;
             }
             return arr;
         }
@@ -311,22 +335,21 @@ namespace Project_Search_Sort
                 CreateNewView(ConvertStringToArr(ViewArray.Text));
                 ViewAnimationRadix.Time = (int)Slider_Time.Value;
                 ViewAnimationRadix.RadixSort();
-
-                //FastResult(ConvertStringToArr(ViewArray.Text));
             }
             else if (st == "Heap_Sort")
             {
                 // Send arr and Create ViewAnimaion new
+                CreateNewView(ConvertStringToArr(ViewArray.Text));
+                // ViewAnimationTree.Time = (int)Slider_Time.Value;
+                // ViewAnimationTree.HeapSort();
 
-                FastResult(ConvertStringToArr(ViewArray.Text));
                 //await ViewAnimation.ShellSort();
             }
-            else if (st ==  "Counting_Sort")
+            else if (st == "Counting_Sort")
             {
-                // Send arr and Create ViewAnimaion new
-
-                FastResult(ConvertStringToArr(ViewArray.Text));
-                //await ViewAnimation.CountingSort();
+                CreateNewView(ConvertStringToArr(ViewArray.Text));
+                ViewAnimationRadix.Time = (int)Slider_Time.Value;
+                ViewAnimationRadix.CountingSort();
             }
             else // ViewColumn
             {
@@ -426,6 +449,7 @@ namespace Project_Search_Sort
             if (st == "Radix_Sort")
             {
                 ViewAnimationRadix = new ViewRadixSort_Control(arr);
+                ViewAnimationRadix.ChangedFormRadix();
                 LayoutAnimation.Children.Add(ViewAnimationRadix);
             }
             else if (st == "Heap_Sort")
@@ -435,7 +459,9 @@ namespace Project_Search_Sort
             }
             else if (st == "Counting_Sort")
             {
-                
+                ViewAnimationRadix = new ViewRadixSort_Control(arr);
+                ViewAnimationRadix.ChangedFormCounting();
+                LayoutAnimation.Children.Add(ViewAnimationRadix);
             }
             else
             {
