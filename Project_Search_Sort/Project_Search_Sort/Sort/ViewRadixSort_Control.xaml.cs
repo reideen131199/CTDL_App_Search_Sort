@@ -74,7 +74,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Radix
         /// </summary>
-        public async void RadixSort()
+        public async Task RadixSort()
         {
             ChangedFormRadix();
 
@@ -88,6 +88,9 @@ namespace Project_Search_Sort
                 for (i = 1; i <= size; ++i)
                 {
                     bool move = (arr[i] << shift) >= 0;
+                    
+                    // Pause
+                    if (pause) await PauseAnimation();
 
                     if (shift == 0 ? !move : move)
                     {
@@ -107,17 +110,29 @@ namespace Project_Search_Sort
                         tmpRadix[j] = radixs[i];
                         tmp[j++] = arr[i];
                     }
+
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                 }
-                
+
                 int n = size + 1;
                 for (int k = n - j; k < n; k++)
                 {
+
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                     radixs[k] = tmpRadix[k - n + j];
                     arr[k] = tmp[k - n + j];
 
                     AnimationControl.MoveColX(radixs[k], (k - 1) * 72, time);
                     AnimationControl.MoveColY(radixs[k], 200, time);
                     await Task.Delay(time + 100);
+
+                    // Pause
+                    if (pause) await PauseAnimation();
+
                 }
 
             }
@@ -132,7 +147,7 @@ namespace Project_Search_Sort
         /// <summary>
         /// Counting Sort
         /// </summary>
-        public async void CountingSort()
+        public async Task CountingSort()
         {
             ChangedFormCounting();
             
@@ -167,6 +182,10 @@ namespace Project_Search_Sort
 
             for (int i = 1; i <= size; i++)
             {
+
+                // Pause
+                if (pause) await PauseAnimation();
+
                 double posX = (size - 9) * 72 / 2 + (radixs[i].radix.Val - 1) * 72;
                 LayoutAnimation.Children.Add(copy[i]);
 
@@ -178,17 +197,31 @@ namespace Project_Search_Sort
 
                 count[radixs[i].radix.Val].radix.Val++;
                 if (copy[i].radix.Val > maxx) maxx = copy[i].radix.Val;
+
+                // Pause
+                if (pause) await PauseAnimation();
+
             }
 
             for (int i = 1; i <= maxx; i++)
             {
+
+                // Pause
+                if (pause) await PauseAnimation();
+
                 count[i].radix.Val += count[i - 1].radix.Val;
                 await Task.Delay(time);
+
+                // Pause
+                if (pause) await PauseAnimation();
             }
 
             radixs = new Radix_Control[size + 1];
             for (int i = 1; i <= size; i++) //8,2,3,2,6
             {
+                // Pause
+                if (pause) await PauseAnimation();
+
                 radixs[i] = CopyRadixControl(copy[i]);
                 LayoutAnimation.Children.Add(radixs[i]);
 
@@ -205,6 +238,10 @@ namespace Project_Search_Sort
                 await Task.Delay(time + 100);
 
                 count[copy[i].radix.Val].radix.Val -= 1;
+
+                // Pause
+                if (pause) await PauseAnimation();
+
             }
 
             #endregion

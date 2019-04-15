@@ -242,21 +242,32 @@ namespace Project_Search_Sort
             run(chosseAlgorithm.Name);
         }
 
- /**/       private void Button_Pause(object sender, RoutedEventArgs e)
+        private void Button_Pause(object sender, RoutedEventArgs e)
         {
+            string st = chosseAlgorithm.Name;
             if (Btn_Pause.Content.ToString() == "Pause")
             {
                 NotSorting();
 
                 // Pause Sort
-                //ViewAnimation.Pause = true;
+                if (st == "Radix_Sort" || st == "Counting_Sort")
+                    ViewAnimationRadix.Pause = true;
+                else if (st == "Heap_Sort")
+                    ViewAnimationTree.Pause = true;
+                else
+                    ViewAnimationColumn.Pause = true;
             }
             else
             {
                 Sorting();
 
                 // Resume Sort
-                //ViewAnimation.Pause = false;
+                if (st == "Radix_Sort" || st == "Counting_Sort")
+                    ViewAnimationRadix.Pause = false;
+                else if (st == "Heap_Sort")
+                    ViewAnimationTree.Pause = false;
+                else
+                    ViewAnimationColumn.Pause = false;
             }
         }
 
@@ -336,7 +347,7 @@ namespace Project_Search_Sort
                 ViewAnimationRadix.Time = (int)Slider_Time.Value;
                 
                 // Run Algorithm
-                ViewAnimationRadix.RadixSort();
+                await ViewAnimationRadix.RadixSort();
             }
             else if (st == "Heap_Sort")
             {
@@ -353,7 +364,7 @@ namespace Project_Search_Sort
                 ViewAnimationRadix.Time = (int)Slider_Time.Value;
 
                 // Run Algorithm
-                ViewAnimationRadix.CountingSort();
+                await ViewAnimationRadix.CountingSort();
             }
             else // ViewColumn
             {
@@ -424,22 +435,6 @@ namespace Project_Search_Sort
         {
             MessageBox.Show(err, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        
-        /// <summary>
-        /// Show Result Sort
-        /// </summary>
-        /// <param name="arr">Array need sort</param>
-        private void FastResult(int[] arr)
-        {
-            // Sort Array
-            Array.Sort(arr);
-            ViewArray.Text = string.Join(", ", arr);
-
-            // Remove ViewAnimation old
-            LayoutAnimation.Children.Remove(ViewAnimationColumn);
-
-            ViewAnimationColumn.LockAll();
-        }
 
         /// <summary>
         /// Create Control for Array
@@ -457,17 +452,20 @@ namespace Project_Search_Sort
                 ViewAnimationRadix = new ViewRadixSort_Control(arr);
                 ViewAnimationRadix.ChangedFormRadix();
                 LayoutAnimation.Children.Add(ViewAnimationRadix);
+                if (Lock) ViewAnimationRadix.LockAll();
             }
             else if (st == "Heap_Sort")
             {
                 ViewAnimationTree = new ViewTreeSort_Control(arr);
                 LayoutAnimation.Children.Add(ViewAnimationTree);
+                if (Lock) ViewAnimationTree.LockAll();
             }
             else if (st == "Counting_Sort")
             {
                 ViewAnimationRadix = new ViewRadixSort_Control(arr);
                 ViewAnimationRadix.ChangedFormCounting();
                 LayoutAnimation.Children.Add(ViewAnimationRadix);
+                if (Lock) ViewAnimationRadix.LockAll();
             }
             else
             {

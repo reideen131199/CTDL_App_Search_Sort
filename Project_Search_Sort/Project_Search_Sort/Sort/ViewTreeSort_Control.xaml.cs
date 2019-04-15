@@ -65,6 +65,9 @@ namespace Project_Search_Sort
 
         private async Task Heapify(int index)
         {
+            // Pause
+            if (pause) await PauseAnimation();
+
             int left = 2 * index;
             int right = 2 * index + 1;
             int largest = index;
@@ -110,6 +113,9 @@ namespace Project_Search_Sort
             nodes[largest].node.BgCompare();
             nodesTree[largest].node.BgCompare();
 
+            // Pause
+            if (pause) await PauseAnimation();
+
             if (largest != index)
             {
                 nodes[largest].node.BgDefault();
@@ -132,12 +138,20 @@ namespace Project_Search_Sort
 
             for (int i = heapSize; i > 1; i--)
             {
+
+                // Pause
+                if (pause) await PauseAnimation();
+
                 await Swap(1, i);
 
                 nodes[heapSize].node.BgLock();
                 nodesTree[heapSize--].node.BgLock();
 
                 await Heapify(1);
+
+                // Pause
+                if (pause) await PauseAnimation();
+
             }
 
             nodes[1].node.BgLock();
@@ -206,6 +220,8 @@ namespace Project_Search_Sort
             int maxFloor = calFloorTree(size);
             LayoutTree.Width = 70 * Math.Pow(2, (maxFloor - 1));
 
+            #region Draw Node for Tree
+
             nodesTree = new Node_Control[size + 1];
             for (int i = 1; i <= size; i++)
             {
@@ -215,6 +231,10 @@ namespace Project_Search_Sort
                 Canvas.SetLeft(nodesTree[i], calCanvasLeft(i, maxFloor));
                 LayoutTree.Children.Add(nodesTree[i]);
             }
+
+            #endregion
+
+            #region Draw Line
 
             lines = new Line[size + 1];
             for (int i=2; i<=size; i++)
@@ -235,6 +255,8 @@ namespace Project_Search_Sort
 
                 LayoutTree.Children.Add(lines[i]);
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -260,14 +282,8 @@ namespace Project_Search_Sort
             int NodeThOfFloor = i - (int)Math.Pow(2, floor - 1);
 
             double space = 0;
-            //if (maxFloor != floor) space = 35 * Math.Pow(2, maxFloor - floor - 1);
-                
-            while (maxFloor != floor)
-            {
-                space += 35 * Math.Pow(2, maxFloor - floor - 1);
-                floor++;
-            }
-            
+            if (maxFloor != floor) space = 35 * (Math.Pow(2, maxFloor - floor) - 1);
+
             return space + step * NodeThOfFloor;
         }
 
@@ -294,6 +310,17 @@ namespace Project_Search_Sort
             while (pause) { await Task.Delay(500); }
         }
 
+        /// <summary>
+        /// BgLock for all columns
+        /// </summary>
+        public void LockAll()
+        {
+            for (int i = 1; i <= size; i++)
+            {
+                nodes[i].node.BgLock();
+                nodesTree[i].node.BgLock();
+            }
+        }
         #endregion
     }
 }
