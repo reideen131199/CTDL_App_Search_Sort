@@ -35,6 +35,7 @@
                 <Button Name="Btn_Pause" Margin="2" Padding="5" Content="Pause" Click="Button_Pause" IsEnabled="False"/>
                 <Button Name="Btn_End" Margin="2" Padding="5" FontSize="16" Content="End" Click="Button_End" IsEnabled="False"/>
             </StackPanel>
+            <!-- Main List Control -->
             
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Border Width="106"/>
