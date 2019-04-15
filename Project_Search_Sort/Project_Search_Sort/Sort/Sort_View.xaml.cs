@@ -334,27 +334,33 @@ namespace Project_Search_Sort
                 // Send arr and Create ViewAnimation new
                 CreateNewView(ConvertStringToArr(ViewArray.Text));
                 ViewAnimationRadix.Time = (int)Slider_Time.Value;
+                
+                // Run Algorithm
                 ViewAnimationRadix.RadixSort();
             }
             else if (st == "Heap_Sort")
             {
                 // Send arr and Create ViewAnimaion new
                 CreateNewView(ConvertStringToArr(ViewArray.Text));
-                // ViewAnimationTree.Time = (int)Slider_Time.Value;
-                // ViewAnimationTree.HeapSort();
+                ViewAnimationTree.Time = (int)Slider_Time.Value;
 
-                //await ViewAnimation.ShellSort();
+                // Run Algorithm
+                await ViewAnimationTree.PerformHeapSort();
             }
             else if (st == "Counting_Sort")
             {
                 CreateNewView(ConvertStringToArr(ViewArray.Text));
                 ViewAnimationRadix.Time = (int)Slider_Time.Value;
+
+                // Run Algorithm
                 ViewAnimationRadix.CountingSort();
             }
             else // ViewColumn
             {
                 CreateNewView(ConvertStringToArr(ViewArray.Text));
                 ViewAnimationColumn.Time = (int)Slider_Time.Value;
+
+                // Run Algorithm
                 switch (st)
                 {
                     case "Selection_Sort":
@@ -454,7 +460,7 @@ namespace Project_Search_Sort
             }
             else if (st == "Heap_Sort")
             {
-                ViewAnimationTree = new ViewTreeSort_Control();
+                ViewAnimationTree = new ViewTreeSort_Control(arr);
                 LayoutAnimation.Children.Add(ViewAnimationTree);
             }
             else if (st == "Counting_Sort")

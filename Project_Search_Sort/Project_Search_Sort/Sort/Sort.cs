@@ -150,7 +150,7 @@ namespace Project_Search_Sort.Sort
         }
         #endregion
 
-        // 
+        // Completed
         #region Counting
         /// <summary>
         /// Counting
@@ -184,7 +184,7 @@ namespace Project_Search_Sort.Sort
         }
         #endregion
 
-        // ahihi
+        // Completed
         #region Quick Sort
         /// <summary>
         /// Quick Sort

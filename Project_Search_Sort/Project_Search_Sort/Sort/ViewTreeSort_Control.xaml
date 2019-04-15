@@ -6,7 +6,22 @@
              xmlns:local="clr-namespace:Project_Search_Sort"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="This is a Tree View" FontSize="24" TextAlignment="Center"/>
-    </Grid>
+    <Border Grid.Row="2" Margin="0, 5, 0, 0" BorderBrush="LightGray" BorderThickness="2"  Background="#fff">
+        <Grid Name="Wrap">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Name="LayoutArray" Grid.Row="0"/>
+            
+            <Canvas Name="LayoutTree" Grid.Row="1" Margin="5, 20, 5, 0"/>
+
+            <TextBlock Name="BlockCompare" Grid.Row="2" FontSize="24" TextAlignment="Center"/>
+
+            
+
+        </Grid>
+    </Border>
 </UserControl>

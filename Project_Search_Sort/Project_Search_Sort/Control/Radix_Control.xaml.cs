@@ -4,7 +4,6 @@ using System.Windows.Media;
 using System.ComponentModel;
 using System.Windows.Controls;
 
-
 namespace Project_Search_Sort
 {
     /// <summary>
