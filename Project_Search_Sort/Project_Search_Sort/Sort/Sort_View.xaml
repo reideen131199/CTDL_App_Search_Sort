@@ -29,7 +29,7 @@
                 <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="400" LostFocus="ViewArray_LostFocus"/>
                 <TextBlock Margin="2" Padding="5 5 2 5" FontSize="16" Text="Speed: "/>
                 <TextBlock Text="Min" Margin="2 2 0 0" Padding="0 9 0 0"/>
-                <Slider Name="Slider_Time" Value="500" Minimum="100" Maximum="1000" Width="100" Margin="1 10 1 10"/>
+                <Slider Name="Slider_Time" Value="300" Minimum="100" Maximum="1000" Width="100" Margin="1 10 1 10"/>
                 <TextBlock Text="Max" Margin="0 2 8 0" Padding="0 9 0 0"/>
                 <Button Name="Btn_StartSort" Margin="2" Padding="5" FontSize="16" Content="Start" Click="Button_StartSort"/>
                 <Button Name="Btn_Pause" Margin="2" Padding="5" Content="Pause" Click="Button_Pause" IsEnabled="False"/>

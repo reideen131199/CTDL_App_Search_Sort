@@ -74,9 +74,6 @@
     <Compile Include="Control\Radix_Control.xaml.cs">
       <DependentUpon>Radix_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\Vector_Control.xaml.cs">
-      <DependentUpon>Vector_Control.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Search\ViewColumnSearch_Control.xaml.cs">
       <DependentUpon>ViewColumnSearch_Control.xaml</DependentUpon>
     </Compile>
@@ -105,10 +102,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Radix_Control.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Control\Vector_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
