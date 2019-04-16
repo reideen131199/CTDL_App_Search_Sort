@@ -82,8 +82,9 @@ namespace Project_Search_Sort
             int[] tmp = new int[arr.Length];
             Radix_Control[] tmpRadix = new Radix_Control[arr.Length];
 
-            for (int shift = 31; shift > -1; --shift)
+            for (int shift = 31; shift > 25; --shift)
             {
+                BlockCompare.Text = "Bit đang xét: " + (31 - shift).ToString();
                 j = 0;
                 for (i = 1; i <= size; ++i)
                 {
@@ -137,7 +138,7 @@ namespace Project_Search_Sort
 
             }
 
-            BlockCompare.Text = string.Join(" ", arr);
+            //BlockCompare.Text = string.Join(" ", arr);
         }
 
         #endregion

@@ -17,7 +17,7 @@
         <StackPanel Name="LayoutListAlgorithmSearch" Grid.Row="0" Orientation="Horizontal"/>
         <!-- End List Algorithm Sort -->
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Name="LayoutListControl" Orientation="Horizontal" Grid.Row="1">
             <Button Name="Btn_RandomArr"  Margin="2" Padding="5" Content="Random An Array" Click="Button_RandomArr"/>
             <TextBox Name="ViewArray" Margin="2" Padding="5" MinWidth="400"  LostFocus="ViewArray_LostFocus"/>
             <TextBlock Text="Value Search" FontSize="16" Margin="2" Padding="5"/>
